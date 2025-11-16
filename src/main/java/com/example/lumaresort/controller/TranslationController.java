@@ -6,10 +6,8 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,27 +26,25 @@ public class TranslationController {
             @RequestParam(required = false) String de) {
 
         try {
-            logger.info("Traduciendo: '{}' de {} a {}", q, langpair.split("\\|")[0], langpair.split("\\|")[1]);
+            logger.info("Traduciendo: '{}' | langpair: '{}'", q, langpair);
 
-            // Codificar parámetros manualmente
-            String encodedText = URLEncoder.encode(q, StandardCharsets.UTF_8.toString());
-            String encodedLangpair = URLEncoder.encode(langpair, StandardCharsets.UTF_8.toString());
             String email = de != null ? de : "info@lumaresort.com";
-            String encodedEmail = URLEncoder.encode(email, StandardCharsets.UTF_8.toString());
 
-            // Construir URL manualmente
-            String url = String.format("%s?q=%s&langpair=%s&de=%s",
-                    MYMEMORY_API,
-                    encodedText,
-                    encodedLangpair,
-                    encodedEmail);
+            // Construir URL usando UriComponentsBuilder (maneja la codificación automáticamente)
+            String url = UriComponentsBuilder
+                    .fromHttpUrl(MYMEMORY_API)
+                    .queryParam("q", q)
+                    .queryParam("langpair", langpair)
+                    .queryParam("de", email)
+                    .encode() // Codifica solo una vez
+                    .toUriString();
 
-            logger.debug("URL de petición: {}", url);
+            logger.info("URL final: {}", url);
 
             // Configurar headers
             HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
             headers.set("User-Agent", "LumaResort/1.0");
+            headers.set("Accept", "application/json");
 
             HttpEntity<String> entity = new HttpEntity<>(headers);
 
@@ -65,10 +61,6 @@ public class TranslationController {
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(response.getBody());
-
-        } catch (UnsupportedEncodingException e) {
-            logger.error("Error de codificación: {}", e.getMessage());
-            return createErrorResponse("Error de codificación: " + e.getMessage());
 
         } catch (RestClientException e) {
             logger.error("Error al llamar a MyMemory API: {}", e.getMessage());
