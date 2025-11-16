@@ -9,7 +9,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/translate")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class TranslationController {
 
     private final RestTemplate restTemplate = new RestTemplate();

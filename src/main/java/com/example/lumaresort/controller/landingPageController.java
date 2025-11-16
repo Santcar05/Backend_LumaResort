@@ -17,7 +17,7 @@ import com.example.lumaresort.service.TipoHabitacionService;
 import com.example.lumaresort.service.UsuarioService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class landingPageController {
 
     @Autowired

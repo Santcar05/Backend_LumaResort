@@ -17,7 +17,7 @@ import com.example.lumaresort.entities.Servicio;
 import com.example.lumaresort.service.ServicioService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/servicios")
 public class mostrarServiciosController {
 

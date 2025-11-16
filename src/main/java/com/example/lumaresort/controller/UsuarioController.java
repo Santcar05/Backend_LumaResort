@@ -17,7 +17,7 @@ import com.example.lumaresort.entities.Usuario;
 import com.example.lumaresort.service.UsuarioService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/usuario")
 public class UsuarioController {
 

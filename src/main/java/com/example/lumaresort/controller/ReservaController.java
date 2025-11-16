@@ -34,7 +34,7 @@ import com.example.lumaresort.service.ReservaService;
 
 @RestController
 @RequestMapping("/reservas")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class ReservaController {
 
     @Autowired
@@ -352,7 +352,6 @@ public class ReservaController {
     // ============================
     //  MÉTODOS HELPER DE SEGURIDAD
     // ============================
-
     /**
      * Verifica si el usuario autenticado tiene el rol de OPERADOR
      */
@@ -366,9 +365,8 @@ public class ReservaController {
 
     /**
      * Verifica si el usuario autenticado tiene acceso a una reserva específica
-     * Tiene acceso si:
-     * - Es el dueño de la reserva (su correo coincide con el de la reserva)
-     * - Tiene el rol de OPERADOR
+     * Tiene acceso si: - Es el dueño de la reserva (su correo coincide con el
+     * de la reserva) - Tiene el rol de OPERADOR
      */
     private boolean tieneAccesoAReserva(Authentication authentication, Reserva reserva) {
         if (authentication == null || reserva == null || reserva.getUsuario() == null) {

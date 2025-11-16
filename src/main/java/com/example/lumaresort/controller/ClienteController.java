@@ -18,7 +18,7 @@ import com.example.lumaresort.entities.Usuario;
 import com.example.lumaresort.service.UsuarioService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/clientes")
 public class ClienteController {
 
@@ -57,10 +57,10 @@ public class ClienteController {
     @GetMapping("/usuario/{idUsuario}")
     public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long idUsuario) {
         Usuario usuario = usuarioService.buscarPorId(idUsuario);
-        
+
         if (usuario != null) {
             return ResponseEntity.ok(usuario);
-        } else { 
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

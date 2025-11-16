@@ -14,7 +14,7 @@ import com.example.lumaresort.entities.Pago;
 import com.example.lumaresort.service.PagoService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("/pagos")
 public class PagoController {
 
