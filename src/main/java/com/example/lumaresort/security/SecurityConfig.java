@@ -65,6 +65,13 @@ public class SecurityConfig {
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .requestMatchers("/actividades").permitAll()
                 .requestMatchers("/actividades/**").permitAll()
+                // Translate API
+                .requestMatchers("/api/translate").permitAll()
+                .requestMatchers("/api/translate/**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/translate").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/translate/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/translate").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/translate/**").permitAll()
                 // Chatbot de contacto
                 .requestMatchers("/api/chatbot/**").permitAll()
                 .requestMatchers("/api/chatbot").permitAll()
