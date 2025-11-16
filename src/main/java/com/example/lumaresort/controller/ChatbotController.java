@@ -3,7 +3,6 @@ package com.example.lumaresort.controller;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
-import java.util.Base64;
 
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,7 @@ import com.example.lumaresort.service.ChatbotService;
 
 @RestController
 @RequestMapping("/api/chatbot")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class ChatbotController {
 
     private final ChatbotService chatbotService;

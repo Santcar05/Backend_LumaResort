@@ -28,7 +28,7 @@ import com.example.lumaresort.repository.ReservaRepository;
 import com.example.lumaresort.service.HabitacionService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class HabitacionController {
 
     @Autowired
@@ -85,6 +85,7 @@ public class HabitacionController {
 
     /**
      * Endpoint para obtener habitaciones disponibles en un rango de fechas
+     *
      * @param fechaInicio fecha de inicio en formato yyyy-MM-dd
      * @param fechaFin fecha de fin en formato yyyy-MM-dd
      * @return lista de habitaciones disponibles en ese rango de fechas
@@ -119,8 +120,8 @@ public class HabitacionController {
                         boolean tieneReserva = reservasActivas.stream()
                                 .anyMatch(reserva -> {
                                     // Solo verificar reservas de esta habitación
-                                    if (reserva.getHabitacion() == null ||
-                                        !reserva.getHabitacion().getIdHabitacion().equals(habitacion.getIdHabitacion())) {
+                                    if (reserva.getHabitacion() == null
+                                            || !reserva.getHabitacion().getIdHabitacion().equals(habitacion.getIdHabitacion())) {
                                         return false;
                                     }
 
