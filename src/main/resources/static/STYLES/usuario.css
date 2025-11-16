@@ -1,0 +1,112 @@
+:root {
+  --azul-electrico: #262de0;
+  --azul-cielo: #49aee0;
+  --ambar: #e09a00;
+  --marron: #614c1f;
+  --azul-nocturno: #303261;
+  --verde-azulado: #305161;
+  --blanco: #ffffff;
+  --gris-claro: #f5f6f7;
+  --sombra: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --radius: 12px;
+}
+
+/* CONTENEDORES */
+.settings-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.card-settings {
+  background: var(--blanco);
+  border-radius: var(--radius);
+  box-shadow: var(--sombra);
+  padding: 1.5rem;
+}
+
+.card-settings h5 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--azul-nocturno);
+}
+
+/* CAMPOS DE TEXTO */
+.form-control {
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  color: rgba(0, 0, 0, 0.5); /* texto translúcido */
+  background-color: transparent; /* fondo transparente */
+}
+
+/* cuando el usuario escribe o enfoca el campo */
+.form-control:focus {
+  border-color: var(--azul-electrico);
+  box-shadow: 0 0 0 0.2rem rgba(38, 45, 224, 0.2);
+  color: #000; /* vuelve a negro sólido */
+  background-color: var(--blanco); /* mantiene contraste al escribir */
+}
+
+/* BOTONES */
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--azul-electrico), var(--azul-cielo));
+  border: none;
+  color: var(--blanco);
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--azul-cielo), var(--azul-electrico));
+  transform: scale(1.05) rotate(-1deg);
+  box-shadow: 0 8px 20px rgba(38, 45, 224, 0.4);
+}
+
+.btn-warning {
+  background: var(--ambar);
+  border: none;
+  color: var(--blanco);
+}
+.btn-warning:hover {
+  background: #ffb400;
+  transform: scale(1.07) rotate(1deg);
+  box-shadow: 0 8px 20px rgba(224, 154, 0, 0.4);
+}
+
+.btn-danger {
+  background: var(--azul-nocturno);
+  border: none;
+  color: var(--blanco);
+}
+.btn-danger:hover {
+  background: #ff4444;
+  transform: scale(1.07);
+  box-shadow: 0 8px 20px rgba(255, 68, 68, 0.4);
+}
+
+/* SWITCH */
+.form-switch .form-check-input {
+  background-color: #ccc;
+  border: none;
+}
+.form-switch .form-check-input:checked {
+  background-color: var(--azul-electrico);
+}
+
+/* ÁREAS DE TEXTO */
+textarea {
+  resize: none;
+  color: rgba(0, 0, 0, 0.5); /* texto translúcido */
+  background-color: transparent;
+}
+
+textarea:focus {
+  color: #000; /* texto sólido al escribir */
+  background-color: var(--blanco);
+}

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar Habitación - Luma Resort</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/STYLES/estilosLandingPage.css" />
+    <link rel="stylesheet" href="/STYLES/generales.css" />
+    <link rel="stylesheet" href="/STYLES/plantillas.css" />
+    <link rel="stylesheet" href="/STYLES/crearHabitacion.css" />
+  </head>
+  <body>
+    <div th:replace="fragmentos :: nav_admin_f"></div>
+
+    <div class="main">
+      <div class="page-header">
+        <h1>
+          Editar
+          <span>Habitación</span>
+        </h1>
+        <img src="/IMAGES/luma_Corregido.jpg" alt="Logo Luma Resort" class="page-header-logo" />
+      </div>
+
+      <div class="card">
+        <h4>Editar Habitación</h4>
+        <form
+          th:action="@{/habitaciones/editar/{id}(id=${habitacion.idHabitacion})}"
+          th:object="${habitacion}"
+          method="post"
+        >
+          <input type="hidden" th:field="*{idHabitacion}" />
+
+          <div class="form-group">
+            <label for="numero">Número de Habitación *</label>
+            <input type="text" id="numero" th:field="*{numero}" required />
+          </div>
+
+          <div class="form-group">
+            <label for="precioPorNoche">Precio por Noche *</label>
+            <input
+              type="number"
+              step="0.01"
+              id="precioPorNoche"
+              th:field="*{precioPorNoche}"
+              min="0"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="estado">Estado *</label>
+            <select id="estado" th:field="*{estado}" required>
+              <option value="">Seleccione un estado</option>
+              <option value="Disponible" th:selected="${habitacion.estado == 'Disponible'}">
+                Disponible
+              </option>
+              <option value="Ocupada" th:selected="${habitacion.estado == 'Ocupada'}">
+                Ocupada
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="capacidad">Capacidad *</label>
+            <input
+              type="number"
+              id="capacidad"
+              th:field="*{capacidad}"
+              min="1"
+              max="100"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="tipoHabitacion">Tipo *</label>
+            <select id="tipoHabitacion" th:field="*{tipoHabitacion.id}" required>
+              <option value="">Seleccione un tipo</option>
+              <option
+                th:each="tipo : ${tiposHabitacion}"
+                th:value="${tipo.id}"
+                th:text="${tipo.nombre}"
+                th:selected="${habitacion.tipoHabitacion.id == tipo.id}"
+              ></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" th:field="*{descripcion}"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="imagenUrl">URLs de Imágenes</label>
+            <textarea
+              id="imagenUrl"
+              name="imagenUrlString"
+              rows="3"
+              th:text="${habitacion.imagenUrl != null ? #strings.arrayJoin(habitacion.imagenUrl, '\n') : ''}"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+          <a href="/habitaciones" class="btn btn-secondary">Cancelar</a>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

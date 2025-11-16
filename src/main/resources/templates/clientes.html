@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luma Resort Admin - Clientes</title>
+
+    <!-- CSS externos -->
+    <link rel="stylesheet" href="/STYLES/estilosLandingPage.css" />
+    <link rel="stylesheet" href="/STYLES/generales.css" />
+    <link rel="stylesheet" href="/STYLES/plantillas.css" />
+    <link rel="stylesheet" href="/STYLES/clientes.css" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <th:block th:replace="~{fragmentos :: nav_admin_f}"></th:block>
+
+    <!-- Main -->
+    <div class="main">
+      <!-- Sección superior -->
+      <div class="topbar">
+        <h1>Clientes / Gestión de clientes</h1>
+        <div class="user-info">
+          <div class="details">
+            <p class="name" th:text="${usuarioRegistrado.nombre}"></p>
+            <p class="role" th:text="${usuarioRegistrado.rol}"></p>
+          </div>
+          <img src="/IMAGES/logoSurf.jpeg" alt="Perfil" />
+        </div>
+      </div>
+      <!-- Aviso de actualización -->
+      <div th:if="${mensaje}" class="alert-success">
+        <p th:text="${mensaje}"></p>
+      </div>
+      <!-- Aviso de eliminación -->
+      <div th:if="${mensajeEliminado}" class="alert-danger">
+        <p th:text="${mensajeEliminado}"></p>
+      </div>
+
+      <!-- Botón volver -->
+      <button class="btn-back">← Volver</button>
+
+      <!-- Formulario para nuevo cliente -->
+      <form th:action="@{/clientes/guardar}" th:object="${nuevoCliente}" method="post">
+        <input type="hidden" th:field="*{idCliente}" />
+        <input type="text" th:field="*{nombre}" placeholder="Nombre completo" required />
+        <input type="date" th:field="*{checkIn}" required />
+        <input type="date" th:field="*{checkOut}" required />
+        <input type="text" th:field="*{tipoHabitacion}" placeholder="Tipo de habitación" required />
+        <select th:field="*{estadoReserva}">
+          <option value="En uso">En uso</option>
+          <option value="Paga">Paga</option>
+          <option value="Pendiente">Pendiente</option>
+        </select>
+        <button type="submit" class="btn btn-edit">Guardar</button>
+      </form>
+
+      <!-- Tabla de clientes -->
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Check-in</th>
+            <th>Check-out</th>
+            <th>Tipo de habitación</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="cliente : ${clientes}">
+            <td th:text="${cliente.nombre}"></td>
+            <td th:text="${cliente.checkIn}"></td>
+            <td th:text="${cliente.checkOut}"></td>
+            <td th:text="${cliente.tipoHabitacion}"></td>
+            <td>
+              <span
+                th:text="${cliente.estadoReserva}"
+                th:classappend="${cliente.estadoReserva == 'En uso' ? 'badge en-uso' :
+                  (cliente.estadoReserva == 'Paga' ? 'badge paga' : 'badge pendiente')}"
+              ></span>
+            </td>
+            <td>
+              <a th:href="@{/clientes/editar/{id}(id=${cliente.idCliente})}" class="btn btn-edit">
+                Editar
+              </a>
+              <a th:href="@{/clientes/borrar/{id}(id=${cliente.idCliente})}" class="btn btn-delete">
+                Eliminar
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <script src="/SCRIPT/script.js" defer></script>
+</html>

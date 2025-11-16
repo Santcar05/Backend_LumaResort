@@ -1,0 +1,436 @@
+/* ============================================= */
+/* === PLANTILLA CARRUSEL ===================== */
+/* ============================================= */
+.Carousel,
+.Carousel2 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  animation: CambioImagenes 30s infinite;
+}
+
+.Carousel h1 {
+  font-size: 3rem;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  margin-bottom: 40px;
+}
+.Carousel2 {
+  animation: CambioImagenes2 30s infinite;
+}
+
+@keyframes CambioImagenes {
+  0% {
+    background-image: url('https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/244QE6GXHBGE5AJV6VCLLG3MVE.jpg');
+  }
+  33.33% {
+    background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
+  }
+  66.66% {
+    background-image: url('https://images.unsplash.com/photo-1493558103817-58b2924bce98');
+  }
+  100% {
+    background-image: url('https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/244QE6GXHBGE5AJV6VCLLG3MVE.jpg');
+  }
+}
+
+@keyframes CambioImagenes2 {
+  0% {
+    background-image: url('https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/244QE6GXHBGE5AJV6VCLLG3MVE.jpg');
+  }
+  33.33% {
+    background-image: url('https://villasdepianguita.com/wp-content/uploads/2020/11/DJI_0490.jpg');
+  }
+  66.66% {
+    background-image: url('https://villasdepianguita.com/wp-content/uploads/2020/11/DJI_0490.jpg');
+  }
+  100% {
+    background-image: url('https://cloudfront-us-east-1.images.arcpublishing.com/elespectador/244QE6GXHBGE5AJV6VCLLG3MVE.jpg');
+  }
+}
+
+/* ============================================= */
+/* === PLANTILLA FORMULARIO ==================== */
+/* ============================================= */
+.Formulario {
+  display: flex;
+  flex-direction: column;
+  /*background-color: var(--section-light-blue);*/
+  background-color: none;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  height: 100%;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.Formulario label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin: 5px 0 5px;
+  color: var(--card-text);
+  width: 100%;
+  transition: color var(--transition-speed) ease;
+}
+
+.Formulario input,
+.Formulario textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  margin-bottom: 3px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.Formulario input {
+  background-color: white;
+  width: 100%;
+}
+
+label p {
+  color: var(--card-text);
+  margin-bottom: 3px;
+  transition: color var(--transition-speed) ease;
+}
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+.BtnEnviar {
+  display: block;
+  margin: 20px 0 0 0 0;
+  background-color: var(--button-primary);
+  color: #fff;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color var(--transition-speed) ease;
+}
+
+.BtnEnviar:hover {
+  background-color: var(--button-hover);
+}
+
+/* ============================================= */
+/* === PLANTILLA CARRUSEL DESLIZANTE =========== */
+/* ============================================= */
+.SlideWrapper {
+  position: relative;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.Slider {
+  display: flex;
+  /*aspect-ratio: 16/9;*/
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
+  scrollbar-width: none;
+  height: 100%;
+  width: 100%;
+}
+
+.Slider::-webkit-scrollbar {
+  display: none;
+}
+
+.SliderNav {
+  display: flex;
+  column-gap: 1rem;
+  position: absolute;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.SliderNav a {
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background-color: hsla(0, 0%, 100%, 0.5);
+  opacity: 0.5;
+  transition: opacity 250ms ease, background-color 250ms ease;
+  display: inline-block;
+}
+
+.SliderNav a:hover {
+  opacity: 1;
+}
+
+.SlideContainer {
+  position: relative;
+  flex: 1 0 100%;
+  scroll-snap-align: start;
+  width: 100%;
+}
+
+.SlideContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.SliderWrapper {
+  height: 100%;
+}
+
+.SlideInfo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+[data-theme='dark'] .SlideInfo {
+  background: rgba(30, 41, 59, 0.9);
+}
+
+.SlideContainer:hover .SlideInfo {
+  opacity: 1;
+}
+
+.SlideInfo h3 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.SlideInfo .Rating {
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.SlideInfo p {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.SlideInfo .Precio {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #c2dded;
+  margin-top: auto;
+}
+
+.SlideInfo .Promo {
+  font-size: 1.2rem;
+  color: #e67e22;
+}
+
+.SlideInfo button {
+  background-color: white;
+  color: #1a3d92;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  margin-top: 30px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+/* ============================================= */
+/* === PLANTILLA CARRUSEL OFERTAS ============== */
+/* ============================================= */
+.CarruselOfertas {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(72.4vh);
+  overflow: hidden;
+}
+
+.OfertaItem {
+  position: relative;
+  flex: 1;
+  transition: flex 0.5s ease;
+  overflow: hidden;
+  min-height: 0;
+  height: 100%;
+}
+
+.OfertaItem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.OverlayInfo {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  text-align: center;
+  font-size: 1.2rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  height: 100%;
+}
+
+.OfertaItem:hover {
+  height: 100%;
+}
+
+.OfertaItem:hover img {
+  transform: scale(1.05);
+  height: 100%;
+}
+
+.OfertaItem:hover .OverlayInfo {
+  opacity: 1;
+}
+
+.CarruselOfertas:hover .OfertaItem {
+  flex: 0;
+}
+
+.CarruselOfertas:hover .OfertaItem:hover {
+  flex: 1 1 100%;
+}
+
+/* ============================================= */
+/* === FORMULARIO RESPONSIVE =================== */
+/* ============================================= */
+@media (max-height: 760px) {
+  .Formulario {
+    padding: 5px;
+    width: 100%;
+    margin-bottom: 2px;
+  }
+
+  .Formulario label {
+    margin: 2.5px 0 2.5px;
+  }
+
+  .Formulario input,
+  .Formulario textarea {
+    padding: 5px;
+    margin-bottom: 2px;
+    font-size: 10px;
+  }
+
+  label p {
+    margin-bottom: 2px;
+  }
+
+  textarea {
+    resize: none;
+    height: 75px;
+  }
+
+  .BtnEnviar {
+    margin: 10px 0 0 0 0;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+/* ============================================= */
+/* === BOTON RESPONSIVE =================== */
+/* ============================================= */
+
+/* -------------------- BOTÓN DETALLE -------------------- */
+.btn-detalle {
+  background: linear-gradient(90deg, #49aee0, #262de0);
+  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
+  padding: 10x 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto brillante al pasar el mouse */
+.btn-detalle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-25deg);
+  transition: left 0.7s ease;
+}
+
+.btn-detalle:hover::before {
+  left: 200%;
+}
+
+.btn-detalle:hover {
+  background: linear-gradient(90deg, #e09a00, #ffb733);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 183, 51, 0.7);
+}
+
+.btn-detalle:hover {
+  background: linear-gradient(90deg, #e09a00, #ffb733);
+  transform: translateY(-2px);
+}
+.sidebar-header {
+  display: flex;
+  align-items: center; /* centra verticalmente */
+  gap: 10px; /* espacio entre logo y texto */
+}
+
+.sidebar-header img {
+  width: 50px; /* ajusta el tamaño del logo si lo quieres más pequeño */
+  height: auto;
+}
+
+.sidebar-title h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.sidebar-title span {
+  display: inline;
+  margin-left: 5px;
+  font-size: 0.9rem;
+  color: #aaa;
+}

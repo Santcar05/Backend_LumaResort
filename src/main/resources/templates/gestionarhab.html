@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luna Resort Admin</title>
+    <link rel="stylesheet" href="../CSS/gestionarhab.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="logo">
+          <div class="logo-icon"></div>
+          Luna Resort Admin
+        </div>
+        <div class="menu-item">Dashboard</div>
+        <div class="menu-item active">Habitaciones</div>
+        <div class="menu-item">Reservas</div>
+        <div class="menu-item">Huéspedes</div>
+        <div class="menu-item">Servicios</div>
+        <div class="menu-item">Pagos</div>
+        <div class="menu-item">Ajustes</div>
+      </div>
+
+      <div class="main-content">
+        <div class="header">
+          <div class="breadcrumb">Gestión de Habitaciones / Habitaciones</div>
+          <div class="user-info">
+            <p class="name" th:text="${usuarioRegistrado.nombre}"></p>
+            <p class="role" th:text="${usuarioRegistrado.rol}"></p>
+            <div class="user-avatar"></div>
+          </div>
+        </div>
+
+        <div class="content">
+          <div class="filters">
+            <div class="filter-row">
+              <span style="margin-right: 10px">🔽</span>
+              <div class="filter-btn active">Tipo</div>
+              <div class="filter-btn">Suite</div>
+              <div class="filter-btn">Doble</div>
+              <div class="filter-btn">Individual</div>
+            </div>
+
+            <div class="filter-row">
+              <span style="margin-right: 10px">🔄</span>
+              <div class="status-filter disponible">Disponibilidad</div>
+              <div class="status-filter">Todas</div>
+              <div class="status-filter">Disponibles</div>
+              <div class="status-filter ocupada">Ocupadas</div>
+              <div class="status-filter mantenimiento">Mantenimiento</div>
+
+              <div class="view-options">
+                <div class="view-btn">📋 Lista</div>
+                <div class="view-btn active">🔲 Cuadrícula</div>
+                <button class="new-btn">+ CREAR HABITACIÓN</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="table-container" id="table-view">
+            <table>
+              <thead>
+                <tr>
+                  <th>Número</th>
+                  <th>Tipo</th>
+                  <th>Precio por noche</th>
+                  <th>Estado</th>
+                  <th>Ocupación</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="room-number">101</td>
+                  <td>Suite Deluxe</td>
+                  <td class="price">$280</td>
+                  <td><span class="status-badge status-disponible">Disponible</span></td>
+                  <td><span class="capacity-badge">👥 4/4</span></td>
+                  <td>
+                    <button class="action-btn">Editar</button>
+                    <button class="action-btn">Ver</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="room-number">102</td>
+                  <td>Doble</td>
+                  <td class="price">$160</td>
+                  <td><span class="status-badge status-ocupada">Ocupada</span></td>
+                  <td><span class="capacity-badge">👥 2/2</span></td>
+                  <td>
+                    <button class="action-btn">Editar</button>
+                    <button class="action-btn">Ver</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="room-number">203</td>
+                  <td>Individual</td>
+                  <td class="price">$110</td>
+                  <td><span class="status-badge status-mantenimiento">Mantenimiento</span></td>
+                  <td><span class="capacity-badge">👥 1/1</span></td>
+                  <td>
+                    <button class="action-btn">Editar</button>
+                    <button class="action-btn">Ver</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="room-number">305</td>
+                  <td>Suite Familiar</td>
+                  <td class="price">$340</td>
+                  <td><span class="status-badge status-ocupada">Ocupada</span></td>
+                  <td><span class="capacity-badge">👥 6/6</span></td>
+                  <td>
+                    <button class="action-btn">Editar</button>
+                    <button class="action-btn">Ver</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="grid-view" id="grid-view">
+            <div class="room-card">
+              <div class="room-image">🛏️</div>
+              <div class="room-status-card status-disponible">Disponible</div>
+              <div class="room-info">
+                <div class="room-title">101 • Suite Deluxe</div>
+                <div style="color: #666; margin-bottom: 10px">$280 por noche</div>
+                <div class="capacity-badge">👥 4/4</div>
+                <div class="card-actions">
+                  <button class="action-btn">Editar</button>
+                  <button class="action-btn">Ver</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="room-card">
+              <div class="room-image">🛏️</div>
+              <div class="room-status-card status-ocupada">Ocupada</div>
+              <div class="room-info">
+                <div class="room-title">102 • Doble</div>
+                <div style="color: #666; margin-bottom: 10px">$160 por noche</div>
+                <div class="capacity-badge">👥 2/2</div>
+                <div class="card-actions">
+                  <button class="action-btn">Editar</button>
+                  <button class="action-btn">Ver</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="room-card">
+              <div class="room-image">🛏️</div>
+              <div class="room-status-card status-mantenimiento">Mantenimiento</div>
+              <div class="room-info">
+                <div class="room-title">203 • Individual</div>
+                <div style="color: #666; margin-bottom: 10px">$110 por noche</div>
+                <div class="capacity-badge">👥 1/1</div>
+                <div class="card-actions">
+                  <button class="action-btn">Editar</button>
+                  <button class="action-btn">Ver</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pagination">
+            <div>Mostrando 1-4 de 24 habitaciones</div>
+            <div class="pagination-controls">
+              <button class="pagination-btn">Anterior</button>
+              <button class="pagination-btn">Siguiente</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <link rel="stylesheet" href="../JS/gestionarhab.js" />
+  </body>
+</html>

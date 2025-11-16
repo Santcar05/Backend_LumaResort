@@ -1,0 +1,561 @@
+/* ============================================= */
+/* === SECCIÓN BANNER ========================== */
+/* ============================================= */
+#Banner {
+  position: relative;
+  width: 100%;
+  height: calc(72.4vh);
+  overflow: hidden;
+}
+
+/* ============================================= */
+/* === SECCIÓN DESCUBRE ======================== */
+/* ============================================= */
+.Descubre {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-only-white);
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  height: calc(72.4vh);
+  width: 100%;
+  flex: 1 0 50%;
+}
+
+.Descubre > div {
+  width: 50%;
+  height: 100%;
+}
+
+.Descubre div h2 {
+  font-size: 3rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  margin-bottom: 40px;
+  color: var(--text-only-white);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+#InfoDescubre {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-only-white);
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  background-color: var(--section-contrast);
+  height: calc(72.4vh);
+  width: 100%;
+  flex: 1 0 50%;
+}
+
+#InfoDescubre > p {
+  font-size: 1.5rem;
+  text-align: justify;
+  padding: 0 30px;
+}
+
+.Descubre > div > p {
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  margin-bottom: 40px;
+  color: var(--text-only-white);
+  text-align: center;
+}
+
+.BtnContainer button,
+.BtnPrincipalOfertas {
+  background-color: var(--button-primary);
+  color: var(--text-only-white);
+  padding: 12px 25px;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  margin-top: 30px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.BtnContainer button:hover {
+  background-color: var(--button-hover);
+  transform: scale(1.05);
+  transition: ease-in-out 0.3s;
+}
+
+.Container {
+  height: 100%;
+  border-radius: 5px;
+}
+
+.SuperContenedor {
+  height: 100%;
+}
+
+/* ============================================= */
+/* === SECCIÓN SERVICIOS ======================= */
+/* ============================================= */
+#Servicios {
+  background-color: var(--section-primary);
+  padding: 50px 20px;
+  height: calc(72.4vh);
+  display: flex;
+  align-items: center;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.ServiciosLayout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+  width: 100%;
+}
+
+.ServiciosCarousel {
+  flex: 1 1 55%;
+  overflow: hidden;
+}
+
+.ServiciosSlider {
+  display: flex;
+}
+
+.ServiciosContainer {
+  display: flex;
+  gap: 20px;
+  padding: 10px 0;
+  animation: ScrollInfinite 30s linear infinite;
+}
+
+@keyframes ScrollInfinite {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ServicioCard {
+  background: var(--card-bg);
+  border-radius: 20px;
+  width: 250px;
+  padding: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 2px solid var(--button-primary);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, color var(--transition-speed) ease;
+}
+
+.ServicioCard:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.ServicioCard img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+.ServicioCard h3 {
+  font-size: 1.1rem;
+  color: var(--card-text);
+  transition: color var(--transition-speed) ease;
+}
+
+.ServicioCard p {
+  font-size: 0.9rem;
+  color: var(--card-text);
+  transition: color var(--transition-speed) ease;
+}
+
+.ServiciosInfo {
+  flex: 1 1 40%;
+  text-align: center;
+}
+
+.ServiciosInfo h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--text-only-white);
+  transition: color var(--transition-speed) ease;
+}
+
+.ServiciosInfo .Subtitulo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-only-white);
+  margin-top: 10px;
+  transition: color var(--transition-speed) ease;
+}
+
+.ServiciosInfo .Descripcion {
+  max-width: 500px;
+  font-size: 1rem;
+  color: var(--text-only-white);
+  margin: 20px auto;
+  line-height: 1.5;
+  transition: color var(--transition-speed) ease;
+}
+
+.ServiciosInfo .BtnContainer button {
+  padding: 10px 20px;
+  background: var(--button-primary);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.ServiciosInfo .BtnContainer button:hover {
+  background: var(--button-hover);
+}
+
+/* ============================================= */
+/* === SECCIÓN TESTIMONIOS ===================== */
+/* ============================================= */
+#Testimonios {
+  background: var(--section-contrast);
+  padding: 50px 0;
+  text-align: center;
+  height: calc(72.4vh);
+  color: var(--text-only-white);
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+#InfoTestimonios {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+#Testimonios h2 {
+  font-size: 2.5rem;
+  color: var(--text-only-white);
+  transition: color var(--transition-speed) ease;
+}
+
+#Testimonios .Descripcion {
+  max-width: 800px;
+  margin: 15px auto 30px;
+  font-size: 1rem;
+  color: var(--section-contrast);
+  transition: color var(--transition-speed) ease;
+}
+
+.Rating {
+  display: inline-flex;
+  align-items: center;
+  background: var(--section-contrast);
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  color: var(--text-only-white);
+  margin-bottom: 30px;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+.Rating img {
+  height: 20px;
+  margin-left: 5px;
+}
+
+.TarjetasTestimonios {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: var(--section-contrast);
+  padding: 20px;
+  width: 100%;
+  margin: 0;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.Tarjeta {
+  background: none;
+  text-align: left;
+  max-width: 200px;
+}
+
+.Tarjeta img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.Tarjeta .Estrellas {
+  width: 100%;
+  color: rgb(232, 231, 225);
+  margin: 5px 0;
+  font-size: x-large;
+  text-align: center;
+  align-self: center;
+}
+
+.Tarjeta .Comentario {
+  font-style: italic;
+  color: var(--text-only-white);
+  padding-left: 5%;
+  transition: color var(--transition-speed) ease;
+}
+
+.Tarjeta .Autor {
+  font-weight: bold;
+  margin-top: 5px;
+  color: var(--text-only-white);
+  padding-left: 5%;
+  transition: color var(--transition-speed) ease;
+}
+
+/* ============================================= */
+/* === SECCIÓN BENEFICIOS ====================== */
+/* ============================================= */
+#PorqueReservar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--section-primary);
+  padding: 50px 20px;
+  text-align: center;
+  color: var(--text-only-white);
+  height: calc(72.4vh);
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+#PorqueReservar h3 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--text-only-white);
+  margin-bottom: 70px;
+  transition: color var(--transition-speed) ease;
+}
+
+.Beneficios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.Beneficio {
+  display: flex;
+  align-items: flex-start;
+  max-width: 400px;
+  text-align: left;
+  gap: 15px;
+}
+
+.Beneficio span {
+  font-size: 2rem;
+}
+
+.Beneficio h4 {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--text-only-white);
+  transition: color var(--transition-speed) ease;
+}
+
+.Beneficio p {
+  font-size: 0.9rem;
+  color: var(--text-only-white);
+  transition: color var(--transition-speed) ease;
+}
+
+/* ============================================= */
+/* === SECCIÓN OFERTAS ========================= */
+/* ============================================= */
+.Ofertas {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex: 1 0 50%;
+  max-width: 100%;
+  height: calc(72.4vh);
+  background-color: var(--section-contrast);
+  transition: background-color var(--transition-speed) ease;
+}
+
+#InfoOfertas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+#InfoOfertas h2 {
+  font-size: 3rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  margin-bottom: 40px;
+  color: var(--text-only-white);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-speed) ease;
+}
+
+#InfoOfertas p {
+  font-size: 1.5rem;
+  text-align: justify;
+  padding: 20px 30px;
+  color: var(--text-only-white);
+  transition: color var(--transition-speed) ease;
+}
+
+#InfoOfertas button {
+  background-color: var(--button-primary);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+#InfoOfertas button:hover {
+  background-color: var(--button-hover);
+}
+
+#ContenidoOfertas {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#ContenidoOfertas h2 {
+  font-size: 3rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  margin-bottom: 40px;
+  color: var(--text-only-white);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-speed) ease;
+}
+
+#ContenidoOfertas img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================= */
+/* === SECCIÓN PLANIFICA/CONTACTO ============== */
+/* ============================================= */
+.Planifica {
+  text-align: center;
+  padding: 0px 20px;
+  background-color: var(--section-primary);
+  height: calc(72.4vh);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex: 1 0 50%;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.Planifica div {
+  width: 100%;
+  height: calc(72.4vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Planifica h2 {
+  font-weight: bold;
+  color: var(--text-only-white);
+  font-size: 3rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  margin-bottom: 40px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-speed) ease;
+}
+
+.Planifica .Descripcion {
+  font-size: 1.5rem;
+  max-width: 700px;
+  margin: 10px auto 30px;
+  color: var(--text-only-white);
+  transition: color var(--transition-speed) ease;
+}
+
+/* ============================================= */
+/* === SECCION FORMULARIO RESPONSIVE =========== */
+/* ============================================= */
+@media (max-height: 760px) {
+  .Planifica {
+    flex-direction: column;
+    height: calc(144.8vh);
+  }
+  .Planifica div {
+    height: calc(72.4vh);
+  }
+
+  #Testimonios {
+    height: calc(180.8vh);
+    padding: 10px 0;
+  }
+  #Testimonios > div {
+    height: calc(74.4vh);
+  }
+
+  .TarjetasTestimonios {
+    padding: 0px;
+  }
+  #PorqueReservar {
+    padding: 20px 10px;
+    height: calc(144.8vh);
+  }
+  .Beneficios {
+    height: calc(72.4vh);
+  }
+  #beneficiosHeading {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+  #beneficiosHeadingContainer {
+    height: calc(72.4vh);
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+}

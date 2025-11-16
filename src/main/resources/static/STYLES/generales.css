@@ -1,0 +1,716 @@
+/* ============================================= */
+/* === VARIABLES DE TEMA Y ESTILOS BASE ======= */
+/* ============================================= */
+:root {
+  /* 🌞 Modo claro */
+  --bg-primary: #f7f9fc; /* Fondo base claro */
+  --bg-secondary: #ffffff; /* Fondo tarjetas */
+  --text-primary: #1e293b; /* Texto principal */
+  --text-secondary: #475569; /* Texto secundario */
+  --header-bg: linear-gradient(90deg, #262de0, #49aee0);
+  --footer-bg: linear-gradient(90deg, #262de0, #49aee0);
+
+  /* Botones */
+  --button-primary: #1d3a8a;
+  --button-hover: #4aa7df;
+  --button-text: #ffffff;
+
+  /* Tarjetas */
+  --card-bg: #ffffff; /* Fondo limpio */
+  --card-text: #0f172a; /* Texto oscuro, más fuerte */
+  --card-shadow: rgba(38, 45, 224, 0.15); /* Sombra con tinte azul (brand) */
+
+  /* 🎨 Secciones más armónicas (modo claro) */
+  --section-primary: #49aee0; /* Azul claro vibrante */
+  --section-secondary: #89cff0; /* Azul pastel */
+  --section-accent: #b3e5fc; /* Celeste suave */
+  --section-contrast: #facc15;
+  --section-highlight: #262de0; /* Azul intenso de marca */
+
+  /* Tablas */
+  --table-white: #f0f0f0;
+  --table-border: #e2e8f0;
+
+  /* Estados */
+  --success: #16a34a;
+  --success-light: #dcfce7;
+  --warning: #f59e0b;
+  --warning-light: #fef3c7;
+  --error: #dc2626;
+  --error-light: #fee2e2;
+  --info: #0ea5e9;
+  --info-light: #e0f2fe;
+
+  /* Extras */
+  --text-only-white: #f0f0f0;
+  --header-height: 80px;
+  --transition-speed: 0.3s;
+}
+
+[data-theme='dark'] {
+  /* 🌙 Modo oscuro */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f0f0f0;
+  --text-secondary: #cbd5e1;
+  --header-bg: linear-gradient(90deg, #1a1a2e, #16213e);
+  --footer-bg: linear-gradient(90deg, #1a1a2e, #16213e);
+
+  /* Botones */
+  --button-primary: #3b82f6;
+  --button-hover: #60a5fa;
+  --button-text: #ffffff;
+
+  /* Tarjetas */
+  --card-bg: #1e293b; /* Azul grisáceo oscuro */
+  --card-text: #e2e8f0; /* Texto claro sobre fondo */
+  --card-shadow: rgba(73, 174, 224, 0.25); /* Sombra azul clara translúcida */
+
+  /* 🌙 Secciones más armónicas (modo oscuro) */
+  --section-primary: #3b82f6; /* Azul brillante */
+  --section-secondary: #2563eb; /* Azul medio */
+  --section-accent: #1e40af; /* Azul oscuro suave */
+  --section-contrast: #e6c229; /* Azul muy profundo */
+  --section-highlight: #040405; /* Azul claro para resaltar */
+
+  /* Tablas */
+  --table-white: #0a0a0a;
+  --table-border: #334155;
+
+  /* Estados */
+  --success: #22c55e;
+  --success-light: #14532d;
+  --warning: #fbbf24;
+  --warning-light: #78350f;
+  --error: #ef4444;
+  --error-light: #7f1d1d;
+  --info: #38bdf8;
+  --info-light: #0c4a6e;
+
+  /* Extras */
+  --text-only-white: #f0f0f0;
+}
+
+/* ============================================= */
+/* === ANIMACIONES PARA CAMBIO DE TEMA ======== */
+/* ============================================= */
+
+.theme-transition-logo {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.theme-transition-active * {
+  transition-duration: 0.7s !important;
+}
+
+/* Efecto de ripple/partículas */
+.theme-ripple-effect {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  animation: themeRipple 0.7s ease-out forwards;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+@keyframes themeRipple {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(30);
+    opacity: 0;
+  }
+}
+
+/* Efecto de brillo para el logo */
+[data-theme='light'] .LogoImg:hover {
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.7));
+}
+
+[data-theme='dark'] .LogoImg:hover {
+  filter: drop-shadow(0 0 8px rgba(100, 200, 255, 0.7));
+}
+
+/* ============================================= */
+/* === RESET Y CONFIGURACIONES GLOBALES ======= */
+/* ============================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  zoom: 125%;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-width: 100%;
+  min-height: 100%;
+  animation: FadeIn 0.8s ease-in-out;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+main {
+  min-height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+/* ============================================= */
+/* === ANIMACIONES ============================= */
+/* ============================================= */
+@keyframes FadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================= */
+/* === HEADER PRINCIPAL ======================== */
+/* ============================================= */
+.MainHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  background: var(--header-bg);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  height: var(--header-height);
+  transition: color var(--transition-speed) ease;
+}
+
+.LogoContainer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.LogoImg {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.LogoImg:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.LogoImg:active {
+  transform: scale(0.95);
+}
+
+.LogoTitle {
+  font-family: 'Lobster', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  animation: FadeIn 1.2s ease-out;
+  max-width: 100px;
+}
+
+#contenedor-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin-left: 10px;
+}
+#contenedor-login a {
+  display: block;
+
+  height: 100%;
+  width: 100%;
+  text-decoration: none;
+  color: var(--text-only-white);
+  font-weight: 500;
+}
+
+/* Contenedor del menú de usuario */
+.LogoContainer.user-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Menú desplegable */
+.right-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1000;
+  min-width: 200px;
+  max-width: 100vw;
+  margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .right-menu {
+    right: -100%;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 180px;
+  }
+
+  .user-menu:last-child .right-menu {
+    right: 0;
+    transform: none;
+  }
+}
+
+.right-menu a {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: none;
+  color: var(--text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right-menu a:hover {
+  background-color: var(--hover-color);
+}
+
+.user-menu:hover .right-menu {
+  display: block;
+}
+
+/* ============================================= */
+/* === NAVEGACIÓN Y BÚSQUEDA ================== */
+/* ============================================= */
+.MainNav {
+  max-width: 60%;
+  height: 100%;
+}
+
+.MainNav ul {
+  list-style: none;
+  display: flex;
+  gap: 5px;
+  height: 100%;
+  width: 50%;
+}
+
+.MainNav li {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.MainNav a,
+.SearchFormHeader button,
+.SearchForm button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  padding: 0 3px;
+  transition: background-color 0.3s, transform 0.2s;
+  height: 100%;
+  width: 100%;
+}
+
+.MainNav a:hover,
+.SearchFormHeader button:hover,
+.SearchForm button:hover {
+  transform: translateY(-2px);
+  color: #ffd700;
+}
+
+.SearchFormHeader {
+  opacity: 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.SearchForm {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transition: opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.SearchFormHeader input,
+.SearchForm input {
+  padding: 7px 10px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  font-size: 0.9rem;
+  transition: box-shadow 0.3s;
+}
+
+.SearchFormHeader input:focus,
+.SearchForm input:focus {
+  box-shadow: 0 0 5px white;
+}
+
+.SearchFormHeader button,
+.SearchForm button {
+  cursor: pointer;
+  background: none;
+  text-align: center;
+  border: none;
+}
+
+.search-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+#toggle-search:checked ~ .SearchFormHeader {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================================= */
+/* === BOTONES ================================ */
+/* ============================================= */
+/*#ButtonBanner,*/
+header nav ul li,
+input,
+button {
+  background-color: none;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+  border: none;
+}
+/*
+#ButtonBanner {
+  color: #f0f0f0;
+  font-family: 'Inter';
+  font-size: 2em;
+  font-weight: bold;
+  padding: 10px 25px;
+  border-radius: 999px;
+  transition: background-color 0.3s ease;
+  background-color: var(--button-primary);
+}
+  */
+#ButtonBanner {
+  font-size: 1.5em;
+}
+
+button:hover
+/*,#ButtonBanner:hover*/ {
+  background-color: var(--button-hover);
+}
+
+/* ============================================= */
+/* === FOOTER ================================== */
+/* ============================================= */
+.Footer {
+  background: var(--footer-bg);
+  text-align: center;
+  padding: 30px 15px;
+  font-family: 'Segoe UI', sans-serif;
+  transition: color var(--transition-speed) ease;
+}
+
+.FooterContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.FooterLogo {
+  flex: 1 1 200px;
+}
+
+.FooterLogo img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.FooterLogo p {
+  font-size: 13px;
+  color: white;
+  margin: 0;
+}
+
+.FooterSection {
+  flex: 1 1 200px;
+}
+
+.FooterSection p {
+  font-size: 14px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.FooterSection a {
+  margin: 0 8px;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.FooterSection a:hover {
+  color: white;
+  transform: scale(1.2);
+}
+
+.RedesSociales,
+.FooterSection {
+  margin-top: 20px;
+}
+
+.ContactTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.ContactTitle i {
+  font-size: 1em;
+  color: white;
+}
+
+.ContactTitle span {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+.ContactInfo {
+  text-align: center;
+}
+
+.ContactInfo p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: white;
+}
+
+.RedesSociales a,
+.ContactTitle a {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.RedesSociales a:hover,
+.ContactTitle a:hover {
+  color: #0a2a57;
+  transform: scale(1.2);
+}
+
+/* Contenedor del menú */
+.dropdown-menu {
+  position: absolute;
+  top: calc(var(--header-height, 80px));
+  background: var(--header-bg);
+
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  min-width: 200px;
+  padding: 10px 0;
+  z-index: 2000;
+}
+
+.LogoContainer:hover .dropdown-menu {
+  display: flex;
+}
+
+.dropdown-item {
+  position: relative;
+  padding: 10px 15px;
+  cursor: pointer;
+  color: var(--text-only-white);
+}
+
+.dropdown-item:hover {
+  background: var(--section-primary, #e2e8f0);
+}
+
+/* Submenú lateral */
+.submenu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 100%; /* aparece a la derecha */
+  background: var(--header-bg);
+  min-width: 160px;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  flex-direction: column;
+  padding: 5px 0;
+}
+
+.submenu a {
+  padding: 8px 12px;
+  display: block;
+  color: var(--text-only-white);
+  text-decoration: none;
+}
+
+.submenu a:hover {
+  background: var(--section-primary, #cbd5e1);
+  color: #fff;
+}
+
+/* Mostrar submenú al hacer hover */
+.dropdown-item:hover .submenu {
+  display: flex;
+}
+
+/* ============================================= */
+/* === MEDIA QUERIES =========================== */
+/* ============================================= */
+@media (max-width: 1400px) {
+  .MainHeader {
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    text-align: center;
+    padding: 2px;
+    padding-bottom: 5px;
+    height: 140px;
+  }
+  .LogoImg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .SearchForm {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+  }
+
+  .SearchForm input {
+    padding: 2px;
+  }
+
+  .SearchForm button {
+    padding: 2px;
+    max-width: 60px;
+    max-height: 30px;
+  }
+
+  .SearchFormHeader {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+  }
+
+  .SearchFormHeader input {
+    padding: 2px;
+  }
+
+  .SearchFormHeader button {
+    padding: 2px;
+    max-width: 60px;
+    max-height: 30px;
+  }
+
+  .MainNav {
+    max-width: 100%;
+    font-size: 12px;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+/* ============================================= */
+/* === NAV ADMIN ============= */
+/* ============================================= */
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background: var(--azul-nav);
+  color: var(--blanco);
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.sidebar .logo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.sidebar .logo h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.sidebar .logo span {
+  font-size: 0.85rem;
+  color: var(--gris-claro);
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px 15px;
+  margin: 8px 0;
+  text-decoration: none;
+  border-radius: 8px;
+  color: var(--blanco);
+  transition: 0.3s;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  background: var(--azul-claro);
+}

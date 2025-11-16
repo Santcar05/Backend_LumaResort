@@ -1,0 +1,137 @@
+/* Fondo principal con la imagen del servicio */
+.main_servicio {
+  position: relative;
+  min-height: calc(72vh);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 60px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Capa oscura para mejorar la legibilidad del texto */
+.main_servicio .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.55);
+  z-index: 1;
+}
+
+/* Contenido sobre la imagen */
+.contenido-servicio {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  font-family: "Inter", sans-serif;
+  color: #1c1c1c;
+}
+
+/* Título */
+.servicio-titulo {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+  color: #222;
+}
+
+/* Descripción */
+.servicio-descripcion {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* Precio */
+.servicio-precio {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.servicio-precio-valor {
+  font-weight: bold;
+  color: #0077cc;
+}
+
+/* Comentarios */
+.comentarios-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comentario-item {
+  background: #f7f7f7;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.comentario-texto {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.comentario-meta {
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+}
+
+.estrellas {
+  color: gold;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .servicio-container {
+    flex-direction: column;
+  }
+
+  .servicio-info,
+  .comentarios-section {
+    max-width: 100%;
+  }
+}
+
+/*.main_servicio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--section-beige);
+  transition: background-color var(--transition-speed) ease;
+}
+
+.main_servicio h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: var(--card-text);  
+  font-size: 3em;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  margin-bottom: 40px;
+  color: var(--card-text);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-speed) ease;
+}
+
+.main_servicio img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}*/

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luma Resort Admin - Tipos de Habitación</title>
+
+    <link rel="stylesheet" href="/STYLES/estilosLandingPage.css" />
+    <link rel="stylesheet" href="/STYLES/generales.css" />
+    <link rel="stylesheet" href="/STYLES/plantillas.css" />
+    <link rel="stylesheet" href="/STYLES/tiposHabitacion.css" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Sidebar desde fragmentos -->
+    <th:block th:replace="~{fragmentos :: nav_admin_f}" th:with="activePage='tipos'"></th:block>
+
+    <!-- Main -->
+    <div class="main">
+      <!-- Sección superior -->
+      <div class="topbar">
+        <h1>Gestión de Tipos de Habitación</h1>
+        <div class="user-info">
+          <div class="details">
+            <p class="name" th:text="${usuarioRegistrado.nombre}"></p>
+            <p class="role" th:text="${usuarioRegistrado.rol}"></p>
+          </div>
+          <img src="/IMAGES/logoSurf.jpeg" alt="Perfil" />
+        </div>
+      </div>
+
+      <!-- Botón volver -->
+      <button class="btn-back">← Volver</button>
+
+      <!-- Formulario para crear nuevo tipo -->
+      <div class="card">
+        <h4>Nuevo Tipo de Habitación</h4>
+        <form th:action="@{/tipos/crear}" th:object="${tipoNuevo}" method="post">
+          <input type="text" th:field="*{nombre}" placeholder="Nombre" required />
+          <textarea th:field="*{descripcion}" placeholder="Descripción" required></textarea>
+          <button type="submit" class="btn btn-primary">Crear</button>
+        </form>
+      </div>
+
+      <!-- Lista de tipos existentes -->
+      <div class="card">
+        <h4>Lista de Tipos</h4>
+
+        <!-- Mensajes de feedback (solo una vez cada uno) -->
+        <div th:if="${successMessage}" class="alert alert-success" role="alert">
+          <i class="bi bi-check-circle-fill"></i>
+          <span th:text="${successMessage}"></span>
+        </div>
+
+        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <span th:text="${errorMessage}"></span>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="tipo : ${tipos}">
+              <td th:text="${tipo.id}"></td>
+              <td th:text="${tipo.nombre}"></td>
+              <td th:text="${tipo.descripcion}"></td>
+              <td>
+                <a th:href="@{/tipos/editar/{id}(id=${tipo.id})}" class="btn btn-warning">Editar</a>
+                <a
+                  th:href="@{/tipos/eliminar/{id}(id=${tipo.id})}"
+                  class="btn btn-danger"
+                  onclick="return confirm('¿Estás seguro de eliminar este tipo?')"
+                >
+                  Eliminar
+                </a>
+                <a th:href="@{/tipos/ver/{id}(id=${tipo.id})}" class="btn btn-info">Ver</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+  <script src="/SCRIPT/script.js" defer></script>
+</html>

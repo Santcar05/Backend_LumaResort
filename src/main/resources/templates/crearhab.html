@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crear Habitación - Luma Resort</title>
+    <style></style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <!--
+    <div class="sidebar">
+      <div>
+        <img
+          src="/IMAGES/luma_Corregido.jpg"
+          alt="Luma Resort Logo"
+          class="LogoImg menu-hover"
+          loading="lazy"
+        />
+        <div>
+          <h2>Luma Resort</h2>
+          <span>admin</span>
+        </div>
+      </div>
+      <a href="#">Dashboard</a>
+      <a href="#">Clientes</a>
+      <a href="#">Reservas</a>
+      <a th:href="@{/tipos}" class="active">Habitaciones</a>
+      <a href="#">Servicios</a>
+      <a href="#">Pagos</a>
+    </div>
+
+  -->
+    <!-- Main Content -->
+
+    <div class="main-content">
+      <th:block th:replace="~{fragmentos :: nav_admin_f}"></th:block>
+
+      <div class="form-container">
+        <div class="form-header">
+          <h1>Crear Nueva Habitación</h1>
+          <p>Complete la información para registrar una nueva habitación en el sistema</p>
+        </div>
+
+        <div class="info-box">
+          <p>
+            <strong>Nota:</strong>
+            El tipo de habitación se asignará automáticamente según los parámetros del sistema. La
+            cuenta de habitación se configurará posteriormente.
+          </p>
+        </div>
+
+        <form
+          th:action="@{/tipos/{id}/crearHabitacion/habitaciones/crear(id=${tipoHabitacionId})}"
+          method="post"
+          th:object="${habitacion}"
+        >
+          <!-- Campo oculto para tipo de habitación (viene como parámetro) -->
+          <input type="hidden" th:field="*{tipoHabitacion}" th:value="${tipoHabitacionId}" />
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="numero">Número de Habitación *</label>
+              <input
+                type="text"
+                id="numero"
+                th:field="*{numero}"
+                placeholder="Ej: 101, 201A"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="precioPorNoche">Precio por Noche *</label>
+              <input
+                type="text"
+                id="precioPorNoche"
+                th:field="*{precioPorNoche}"
+                min="0"
+                placeholder="0.00"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="estado">Estado *</label>
+              <select id="estado" th:field="*{estado}" required>
+                <option value="">Seleccione un estado</option>
+                <option value="DISPONIBLE">Disponible</option>
+                <option value="OCUPADA">Ocupada</option>
+                <option value="MANTENIMIENTO">En Mantenimiento</option>
+                <option value="LIMPIEZA">En Limpieza</option>
+                <option value="FUERA_DE_SERVICIO">Fuera de Servicio</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="capacidad">Capacidad (personas) *</label>
+              <input
+                type="number"
+                id="capacidad"
+                th:field="*{capacidad}"
+                min="1"
+                max="100"
+                placeholder="Número de huéspedes"
+                required
+              />
+            </div>
+
+            <div class="form-group full-width">
+              <label for="descripcion">Descripción</label>
+              <textarea
+                id="descripcion"
+                th:field="*{descripcion}"
+                placeholder="Describa las características y comodidades de la habitación..."
+              ></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="imagenUrl">URLs de Imágenes (separadas por comas)</label>
+              <textarea
+                id="imagenUrl"
+                name="imagenUrlString"
+                rows="3"
+                placeholder="https://ejemplo.com/imagen1.jpg, https://ejemplo.com/imagen2.jpg"
+              ></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label>Fechas de Disponibilidad</label>
+              <div class="date-inputs">
+                <div class="form-group">
+                  <label for="checkinDesde">Check-in Desde</label>
+                  <input type="datetime-local" id="checkinDesde" th:field="*{checkinDesde}" />
+                </div>
+                <div class="form-group">
+                  <label for="checkoutHasta">Check-out Hasta</label>
+                  <input type="datetime-local" id="checkoutHasta" th:field="*{checkoutHasta}" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Crear Habitación</button>
+            <a th:href="@{/tipos/ver/{id}(id=${tipoHabitacionId})}" class="btn btn-secondary">
+              Cancelar
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // Validación del formulario
+      document.querySelector('form').addEventListener('submit', function (e) {
+        const precio = document.getElementById('precioPorNoche').value;
+        const capacidad = document.getElementById('capacidad').value;
+        const numero = document.getElementById('numero').value.trim();
+
+        if (!numero) {
+          alert('El número de habitación es obligatorio');
+          e.preventDefault();
+          return;
+        }
+
+        if (precio <= 0) {
+          alert('El precio por noche debe ser mayor a 0');
+          e.preventDefault();
+          return;
+        }
+
+        if (capacidad < 1) {
+          alert('La capacidad debe ser al menos 1 persona');
+          e.preventDefault();
+          return;
+        }
+
+        // Validar fechas si están presentes
+        const checkin = document.getElementById('checkinDesde').value;
+        const checkout = document.getElementById('checkoutHasta').value;
+
+        if (checkin && checkout && new Date(checkin) >= new Date(checkout)) {
+          alert('La fecha de check-out debe ser posterior a la fecha de check-in');
+          e.preventDefault();
+          return;
+        }
+      });
+
+      // Procesamiento de URLs de imágenes
+      document.querySelector('form').addEventListener('submit', function (e) {
+        const imagenUrlString = document.querySelector('textarea[name="imagenUrlString"]').value;
+        if (imagenUrlString.trim()) {
+          // Crear un campo oculto con el array de URLs
+          const urls = imagenUrlString
+            .split(',')
+            .map(url => url.trim())
+            .filter(url => url);
+
+          // Eliminar el textarea temporal
+          document.querySelector('textarea[name="imagenUrlString"]').remove();
+
+          // Crear campos ocultos para cada URL
+          urls.forEach((url, index) => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = `imagenUrl[${index}]`;
+            input.value = url;
+            this.appendChild(input);
+          });
+        } else {
+          document.querySelector('textarea[name="imagenUrlString"]').remove();
+        }
+      });
+
+      // Formateo automático del precio
+      document.getElementById('precioPorNoche').addEventListener('input', function (e) {
+        let value = parseFloat(e.target.value);
+      });
+
+      // Auto-generar sugerencia de número de habitación
+      document.getElementById('numero').addEventListener('focus', function (e) {
+        if (!e.target.value) {
+          // Aquí podrías implementar lógica para sugerir el siguiente número disponible
+          e.target.placeholder = 'Ej: 101, 201A, Suite-01';
+          x;
+        }
+      });
+    </script>
+  </body>
+</html>

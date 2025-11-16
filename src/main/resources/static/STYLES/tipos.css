@@ -1,0 +1,80 @@
+/* Fondo general */
+body {
+  background-color: #f5f7fb;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título principal */
+.titulo-principal {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1d3557;
+  margin-bottom: 20px;
+}
+
+/* Tarjetas */
+.card {
+  border-radius: 12px;
+  border: none;
+}
+
+.card-header {
+  background-color: #1d3557;
+  color: white;
+  font-weight: bold;
+  border-radius: 12px 12px 0 0 !important;
+}
+
+/* Tabla */
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.table thead {
+  background-color: #1d3557;
+  color: white;
+  font-weight: 600;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #d8f3dc; /* verde claro */
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* Botones */
+.btn {
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn-warning {
+  background-color: #f4a261;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #e63946;
+  border: none;
+}
+
+.btn-info {
+  background-color: #457b9d;
+  border: none;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #1d3557;
+  border: none;
+}

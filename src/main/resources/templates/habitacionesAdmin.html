@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Habitaciones - Luma Resort</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/STYLES/estilosLandingPage.css" />
+    <link rel="stylesheet" href="/STYLES/generales.css" />
+    <link rel="stylesheet" href="/STYLES/plantillas.css" />
+    <link rel="stylesheet" href="/STYLES/crearHabitacion.css" />
+    <style>
+      /* Asegura que las URLs se vean separadas */
+      #imagenUrl {
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div th:replace="fragmentos :: nav_admin_f"></div>
+
+    <div class="main">
+      <div class="page-header">
+        <h1>
+          Gestión de
+          <span>Habitaciones</span>
+        </h1>
+        <img src="/IMAGES/luma_Corregido.jpg" alt="Logo Luma Resort" class="page-header-logo" />
+      </div>
+
+      <!-- Botón Nueva Habitación -->
+      <button class="btn btn-primary btn-sm" onclick="openModal('crear')">
+        + Nueva Habitación
+      </button>
+
+      <div class="card" th:if="${#lists.isEmpty(habitaciones) == false}">
+        <h4>Lista de Habitaciones</h4>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Número</th>
+              <th>Precio por noche</th>
+              <th>Estado</th>
+              <th>Capacidad</th>
+              <th>Tipo</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="habitacion : ${habitaciones}">
+              <td th:text="${habitacion.idHabitacion}"></td>
+              <td th:text="${habitacion.numero}"></td>
+              <td th:text="'$' + ${habitacion.precioPorNoche}"></td>
+              <td
+                th:text="${habitacion.estado}"
+                th:classappend="${habitacion.estado == 'Disponible'} ? 'estado-disponible' : 'estado-ocupada'"
+              ></td>
+              <td th:text="${habitacion.capacidad} + ' personas'"></td>
+              <td
+                th:text="${habitacion.tipoHabitacion != null ? habitacion.tipoHabitacion.nombre : 'Sin tipo'}"
+              ></td>
+              <td
+                th:text="${habitacion.descripcion != null ? habitacion.descripcion : 'Sin descripción'}"
+              ></td>
+              <td>
+                <form
+                  th:action="@{/habitaciones/editar/{id}(id=${habitacion.idHabitacion})}"
+                  method="get"
+                >
+                  <button
+                    type="submit"
+                    onclick="openModal('editar', [[${habitacion.idHabitacion}]])"
+                    class="btn btn-warning btn-sm"
+                  >
+                    Editar
+                  </button>
+                </form>
+
+                <a
+                  th:href="@{/habitaciones/eliminar/{id}(id=${habitacion.idHabitacion})}"
+                  class="btn btn-danger btn-sm"
+                  onclick="return confirm('¿Está seguro de eliminar esta habitación?')"
+                >
+                  Eliminar
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal Crear/Editar -->
+    <div id="habitacionModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modal-title">Nueva Habitación</h2>
+
+        <form id="habitacionForm" th:object="${habitacion}" method="post">
+          <input type="hidden" th:field="*{idHabitacion}" id="habitacionId" />
+
+          <div class="form-group">
+            <label for="numero">Número de Habitación *</label>
+            <input
+              type="text"
+              id="numero"
+              th:field="*{numero}"
+              placeholder="Ej: 101, 201A"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="precioPorNoche">Precio por Noche *</label>
+            <input
+              type="number"
+              step="0.01"
+              id="precioPorNoche"
+              th:field="*{precioPorNoche}"
+              min="0"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="estado">Estado *</label>
+            <select id="estado" th:field="*{estado}" required>
+              <option value="">Seleccione un estado</option>
+              <option value="Disponible">Disponible</option>
+              <option value="Ocupada">Ocupada</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="capacidad">Capacidad *</label>
+            <input type="number" id="capacidad" th:field="*{capacidad}" min="1" max="10" required />
+          </div>
+
+          <div class="form-group">
+            <label for="tipoHabitacion">Tipo *</label>
+            <select id="tipoHabitacion" th:field="*{tipoHabitacion.id}" required>
+              <option value="">Seleccione un tipo</option>
+              <option
+                th:each="tipo : ${tiposHabitacion}"
+                th:value="${tipo.id}"
+                th:text="${tipo.nombre}"
+              ></option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" th:field="*{descripcion}"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function openModal(mode, id = null) {
+        const modal = document.getElementById('habitacionModal');
+        const title = document.getElementById('modal-title');
+        const form = document.getElementById('habitacionForm');
+        const idField = document.getElementById('habitacionId');
+        const numero = document.getElementById('numero');
+        const precio = document.getElementById('precioPorNoche');
+        const estado = document.getElementById('estado');
+        const capacidad = document.getElementById('capacidad');
+        const tipo = document.getElementById('tipoHabitacion');
+        const descripcion = document.getElementById('descripcion');
+        const imagenUrl = document.getElementById('imagenUrl');
+
+        if (mode === 'crear') {
+          title.innerText = 'Nueva Habitación';
+          form.action = '/habitaciones/crear';
+          idField.value = '';
+          form.reset();
+        } else if (mode === 'editar') {
+          title.innerText = 'Editar Habitación';
+          form.action = '/habitaciones/editar/' + id;
+          idField.value = id;
+
+          fetch(`/habitaciones/${id}/json`)
+            .then(res => res.json())
+            .then(data => {
+              numero.value = data.numero || '';
+              precio.value = data.precioPorNoche || '';
+              estado.value = data.estado || '';
+              capacidad.value = data.capacidad || '';
+              tipo.value = data.tipoHabitacion ? data.tipoHabitacion.id : '';
+              descripcion.value = data.descripcion || '';
+              imagenUrl.value = data.imagenUrl ? data.imagenUrl.join('\n') : '';
+            })
+            .catch(err => {
+              console.error(err);
+              alert('No se pudieron cargar los datos de la habitación.');
+            });
+        }
+
+        modal.style.display = 'block';
+      }
+
+      /*************  ✨ Windsurf Command ⭐  *************/
+      /**
+       * Cierra el modal de creaci n/edici n de habitaci n.
+       */
+      /*******  2f68fddc-8388-439f-a281-06f512aa3b61  *******/
+      function closeModal() {
+        document.getElementById('habitacionModal').style.display = 'none';
+      }
+    </script>
+  </body>
+</html>

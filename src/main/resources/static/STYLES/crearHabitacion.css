@@ -1,0 +1,366 @@
+:root {
+  --azul-fondo: #3b82f5;
+  --azul-claro: #60a5fa;
+  --azul-nav: #0a3a82;
+  --azul-oscuro: #052c65;
+  --blanco: #ffffff;
+  --gris-claro: #f5f6fa;
+  --gris-medio: #dcdde1;
+  --negro: #2f3640;
+
+  --verde: #7ed957;
+  --ambar: #ffb800;
+  --rojo: #ff6b6b;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--azul-fondo);
+  color: var(--blanco);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background: var(--azul-nav);
+  color: var(--blanco);
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.sidebar .logo img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.sidebar .logo h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.sidebar .logo span {
+  font-size: 0.85rem;
+  color: var(--gris-claro);
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px 15px;
+  margin: 8px 0;
+  text-decoration: none;
+  border-radius: 8px;
+  color: var(--blanco);
+  transition: 0.3s;
+}
+
+.sidebar a.active,
+.sidebar a:hover {
+  background: var(--azul-claro);
+}
+
+/* Main */
+.main {
+  margin-left: 260px;
+  padding: 20px 40px;
+}
+
+.page-header {
+  background: var(--azul-claro);
+  padding: 15px 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.page-header h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.page-header-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* circular */
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+/* Botón volver */
+.btn-back {
+  background: var(--ambar);
+  color: var(--negro);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Tarjetas */
+.card {
+  background: var(--blanco);
+  color: var(--negro);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: var(--azul-oscuro);
+}
+
+/* Imágenes en la tabla */
+.imagen-lista img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 5px;
+  margin-bottom: 3px;
+  border: 1px solid var(--gris-medio);
+}
+
+/* Botones */
+.btn {
+  text-decoration: none;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-right: 6px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: var(--azul-claro);
+  color: white;
+}
+
+/* Botón Editar: animación hover */
+.btn-warning {
+  background: var(--ambar); /* color base */
+  color: var(--negro); /* letras oscuras */
+  transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+.btn-warning:hover {
+  background: var(--azul-oscuro); /* azul oscuro al pasar el mouse */
+  color: var(--blanco); /* letras claras para contraste */
+  transform: scale(1.05); /* ligero "zoom" */
+}
+
+.btn-danger {
+  background: var(--rojo);
+  color: white;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-danger:hover {
+  background: #ff4b4b; /* un rojo más intenso o brillante */
+  transform: scale(1.05); /* efecto leve de "zoom" */
+}
+
+.btn-info {
+  background: var(--azul-fondo);
+  color: white;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--blanco);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  color: var(--negro);
+}
+
+table th,
+table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--gris-medio);
+}
+
+table th {
+  background: var(--gris-claro);
+  color: var(--azul-oscuro);
+  font-weight: 600;
+}
+
+table .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px; /* igual para todos */
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  min-width: 80px; /* asegura ancho mínimo igual */
+}
+
+/* Colores de estado en tabla */
+td.estado-disponible {
+  color: var(--verde);
+  font-weight: 600;
+}
+
+td.estado-ocupada {
+  color: var(--rojo);
+  font-weight: 600;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* Contenido del modal */
+.modal-content {
+  background: var(--blanco);
+  color: var(--negro);
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 12px;
+  width: 50%;
+  max-width: 700px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.4s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Encabezado del modal */
+.modal-content h2 {
+  margin-bottom: 25px;
+  font-size: 1.5rem;
+  color: var(--azul-oscuro);
+  text-align: center;
+}
+
+/* Botón cerrar */
+.close {
+  color: var(--rojo);
+  font-size: 1.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  float: right;
+  margin-top: -10px;
+  transition: color 0.3s ease;
+}
+.close:hover {
+  color: var(--azul-oscuro);
+}
+
+/* Formulario dentro del modal */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Grupos de formulario */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: var(--azul-oscuro);
+}
+
+/* Inputs y textarea */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--gris-medio);
+  font-size: 0.95rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--azul-claro);
+  box-shadow: 0 0 5px rgba(59, 130, 245, 0.4);
+}
+
+/* Botones dentro del modal */
+.modal-content button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.modal-content .btn-primary {
+  background: var(--azul-claro);
+  color: var(--blanco);
+  border: none;
+}
+
+.modal-content .btn-primary:hover {
+  background: var(--azul-oscuro);
+}
+
+.modal-content .btn-secondary {
+  background: var(--gris-medio);
+  color: var(--negro);
+  border: none;
+}
+
+.modal-content .btn-secondary:hover {
+  background: var(--gris-claro);
+}
+
+/* Para textarea de descripción e imágenes */
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
+}

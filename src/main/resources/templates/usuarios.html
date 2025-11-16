@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Ajustes de Usuario</title>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/STYLES/estilosLandingPage.css}" />
+    <link rel="stylesheet" th:href="@{/STYLES/generales.css}" />
+    <link rel="stylesheet" th:href="@{/STYLES/plantillas.css}" />
+    <link rel="stylesheet" th:href="@{/STYLES/usuario.css}" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <th:block th:replace="~{fragmentos :: header_f}"></th:block>
+
+    <!-- Contenedor principal con más espacio superior -->
+    <div class="container py-5 mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow">
+            <div class="card-body p-4">
+              <h2 class="text-center mb-4">Ajustes de Usuario</h2>
+
+              <!-- Mensajes de éxito o error -->
+              <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+              <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+              <!-- Formulario de datos personales -->
+              <form th:action="@{/Usuario/actualizar-datos}" th:object="${usuario}" method="post">
+                <input type="hidden" th:field="*{idUsuario}" />
+
+                <div class="form-group">
+                  <label for="nombre">Nombre:</label>
+                  <input type="text" id="nombre" th:field="*{nombre}" class="form-control" />
+                  <span
+                    th:if="${#fields.hasErrors('nombre')}"
+                    th:errors="*{nombre}"
+                    class="text-danger"
+                  ></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="apellido">Apellido:</label>
+                  <input type="text" id="apellido" th:field="*{apellido}" class="form-control" />
+                  <span
+                    th:if="${#fields.hasErrors('apellido')}"
+                    th:errors="*{apellido}"
+                    class="text-danger"
+                  ></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="correo">Email:</label>
+                  <input type="email" id="correo" th:field="*{correo}" class="form-control" />
+                  <span
+                    th:if="${#fields.hasErrors('correo')}"
+                    th:errors="*{correo}"
+                    class="text-danger"
+                  ></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="telefono">Teléfono:</label>
+                  <input type="tel" id="telefono" th:field="*{telefono}" class="form-control" />
+                  <span
+                    th:if="${#fields.hasErrors('telefono')}"
+                    th:errors="*{telefono}"
+                    class="text-danger"
+                  ></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="contrasena">Contrasena:</label>
+                  <input
+                    id="contrasena"
+                    th:field="*{contrasena}"
+                    class="form-control"
+                    type="text"
+                    th:value="${contrasena}"
+                  />
+                  <span
+                    th:if="${#fields.hasErrors('contrasena')}"
+                    th:errors="*{contrasena}"
+                    class="text-danger"
+                  ></span>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary px-4">Guardar Cambios</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-8">
+        <div class="card shadow border-danger">
+          <div class="card-body p-4">
+            <h3 class="text-danger text-center mb-4">Eliminar Cuenta</h3>
+            <p class="text-center mb-4">Una vez eliminada la cuenta, no podrás recuperar tu información.</p>
+            
+            <form th:action="@{/Usuario/eliminar-cuenta}" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.');">
+              <div class="text-center">
+                <button type="submit" class="btn btn-danger px-4">
+                  Eliminar Cuenta
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="/SCRIPT/script.js" defer></script>
+  </body>
+</html>

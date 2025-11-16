@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title th:text="'Habitaciones de tipo ' + ${tipoHabitacion.nombre}"></title>
+    <link rel="stylesheet" href="/STYLES/detalle.css" />
+  </head>
+  <body>
+    <!-- Encabezado -->
+    <header class="page-header">
+      <h1 th:text="'Habitaciones de tipo ' + ${tipoHabitacion.nombre}"></h1>
+      <p
+        th:if="${!habitaciones.isEmpty()}"
+        th:text="'Capacidad: ' + ${habitaciones.get(0).capacidad}"
+      ></p>
+    </header>
+
+    <div class="container">
+      <!-- Botón volver -->
+      <div class="top-actions">
+        <a href="/tipos" class="btn back-btn">⬅ Volver</a>
+      </div>
+
+      <!-- Galería de imágenes -->
+      <div class="gallery">
+        <img
+          src="https://content.elmueble.com/medio/2025/05/14/00578648-dormitorio-pequeno-comoda-mueble-versatil-aprovechar-espacio-habitacion-pequena_d5cf6f55_250514111519_2000x2501.webp"
+          alt="Habitación Individual 1"
+        />
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN1v7HvCX_1pxl-ieU-g8U2pTG19_McJHACQ&s"
+          alt="Habitación Individual 2"
+        />
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTygxKlTSE-s1dhJb_t7N-g2zC26YdkvgRJhg&s"
+          alt="Habitación Individual 3"
+        />
+        <img
+          src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/612342243.jpg?k=55e1ddf32618fd4677ea580ef871d1068fb8a29299094ae2aaf96bf3aae55393&o=&hp=1"
+          alt="Habitación Individual 4"
+        />
+      </div>
+
+      <!-- Tabla de habitaciones -->
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Número</th>
+            <th>Precio por noche</th>
+            <th>Estado</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="habitacion : ${habitaciones}">
+            <td th:text="${habitacion.idHabitacion}"></td>
+            <td th:text="${habitacion.numero}"></td>
+            <td th:text="${habitacion.precioPorNoche}"></td>
+            <td
+              th:text="${habitacion.estado}"
+              th:classappend="${habitacion.estado == 'Disponible'} ? 'estado-disponible' : 'estado-ocupada'"
+            ></td>
+            <td th:text="${habitacion.descripcion}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,376 @@
+/* ---------------------- Estilos generales ---------------------- */
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  overflow-x: hidden; /* evitar scroll horizontal */
+}
+
+h1,
+h2 {
+  font-family: 'Rubik Mono One', sans-serif;
+  text-align: center;
+}
+
+h3 {
+  font-family: 'Inter', sans-serif;
+}
+
+/* ---------------------- Secciones de pantalla completa según contenido ---------------------- */
+.seccion {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* ahora centra verticalmente el contenido */
+  color: var(--blanco);
+}
+
+.contenido-seccion {
+  /*max-width: 1200px; */ /* no exceder ancho máximo */
+  width: 100%;
+}
+
+/* Colores de cada sección */
+/* Sección de agregar servicio */
+.seccion-azul {
+  background: var(--section-primary);
+  height: 100%;
+}
+.seccion-azul .contenido-seccion {
+  background: var(--section-blue);
+  padding: 0 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.seccion-ambar {
+  height: 70vh;
+  background-color: var(--section-contrast);
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.seccion-ambar h2 {
+  font-size: 2em;
+  margin-bottom: 25px;
+  color: var(--text-only-white); /* contraste con ámbar */
+  text-align: center;
+}
+
+.seccion-ambar form button {
+  background-color: #e09a00; /* ámbar dorado */
+  color: #111;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.seccion-ambar form button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.formulario-agregar-servicio h2 {
+  margin-bottom: 10px; /* Reduce el espacio entre el subtítulo y el formulario */
+}
+
+.formulario-agregar-servicio {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* <-- Cambia a flex-start para que el subtítulo y el formulario queden arriba y juntos */
+  align-items: center; /* Centra horizontalmente */
+  padding-top: 40px; /* Opcional: agrega espacio arriba si lo deseas */
+}
+
+/* ---------------------- Productos / Tarjetas ---------------------- */
+.productos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+/* Tarjeta estilo existente */
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* espacio entre contenido y footer */
+  width: 250px;
+  height: 400px;
+  padding: 15px;
+  box-sizing: border-box;
+  background: #4361ee;
+  border: 2px solid var(--info-light);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  color: var(--info-light);
+  /*border: 2px solid #ccc;*/
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tarjeta img {
+  width: 100%; /* ocupa todo el ancho de la tarjeta */
+  height: 180px; /* alto fijo para todas */
+  object-fit: cover; /* recorta la imagen si no cabe, mantiene proporción */
+  border-radius: 5px; /* opcional, bordes redondeados */
+}
+
+.tarjeta h3,
+.tarjeta p {
+  margin: 5px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*
+.tarjeta button {
+  background: var(--azul-nocturno);
+  color: var(--blanco);
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.tarjeta button:hover {
+  background: var(--marron-oscuro);
+}
+
+.tarjeta-footer {
+  display: flex;
+  flex-direction: column; /* precio arriba, botón debajo */
+/*gap: 10px; /* espacio entre precio y botón */
+/*margin-top: auto; /* empuja al final de la tarjeta 
+}
+
+.tarjeta-footer p {
+  margin: 0;
+}
+
+.tarjeta-footer button {
+  background: #111;
+  color: white;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.tarjeta-footer button:hover {
+  background: crimson;
+}
+
+*/
+
+/* ---------------------- Formulario ---------------------- */
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+form input,
+form button {
+  padding: 10px;
+  border: 1px solid var(--gris-claro);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+form button {
+  background: var(--azul-nocturno);
+  color: var(--blanco);
+  cursor: pointer;
+}
+
+form button:hover {
+  background: var(--marron-oscuro);
+}
+
+/* ---------------------- Botones de secciones ---------------------- */
+.seccion-ambar button,
+.seccion-ambar a button {
+  background-color: var(--section-primary);
+  color: var(--blanco);
+}
+
+.seccion-ambar button:hover,
+.seccion-ambar a button:hover {
+  background-color: var(--section-secondary);
+}
+
+/* ---------------------- Responsividad ---------------------- */
+@media (max-width: 768px) {
+  .productos {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  form {
+    max-width: 90%;
+  }
+}
+/* Slider contenedor */
+
+.Slider {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.SliderTrack {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  will-change: transform;
+}
+
+.SlideContainer {
+  flex: 0 0 auto;
+  width: 250px; /* Ajusta según tu diseño */
+}
+
+.ServiciosContainer {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: ScrollInfinite 40s linear infinite;
+}
+
+.carousel {
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.carousel-track {
+  display: flex;
+  animation: scrollInfinite 20s linear infinite;
+}
+
+.carousel-track > * {
+  flex: 0 0 auto;
+  margin-right: 20px;
+}
+
+.carousel-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  height: 350px;
+}
+
+@keyframes scrollInfinite {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  } /* 50% porque duplicaste las tarjetas */
+}
+
+/* Hero Section */
+.hero-section {
+  /*min-height: 69vh;*/
+  /*
+  background: linear-gradient(
+    135deg,
+    #262de0 0%,
+    #305161 100%
+  ); /* azul eléctrico + verde azulado oscuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--card-text);
+  /*padding: 50px 0;*/
+  box-sizing: border-box;
+}
+
+.hero-content {
+  height: 69vh;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 40px;
+}
+
+.hero-texto {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-texto h1 {
+  font-family: 'Rubik Mono One', sans-serif;
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+
+.hero-texto p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.hero-imagen {
+  /*50% porciento cada hijo*/
+  width: 50%;
+  height: 100%;
+}
+
+.hero-imagen img {
+  /*max-width: 100%;*/
+  height: 100%;
+  /*border-radius: 15px;*/
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Botón principal destacado */
+.btn-principal {
+  background: var(--color-boton);
+  color: var(--text-only-white) !important;
+  border: none !important;
+  padding: 15px 25px !important;
+  font-size: 1.1em !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  border-radius: 10px !important;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s !important;
+  box-shadow: 0 4px 16px rgba(38, 45, 224, 0.2) !important;
+}
+.btn-principal:hover {
+  background: var(--color-boton-hover);
+  color: var(--text-only-white) !important;
+  transform: scale(1.07) !important;
+  box-shadow: 0 8px 24px rgba(218, 180, 11, 0.3) !important;
+}
+#btn-detalle {
+  font-size: 1.2em !important;
+}
+
+/* Responsive: Se ajusta en pantallas pequeñas */
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: center;
+    text-align: center;
+  }
+  .hero-imagen img {
+    max-width: 80%;
+    margin-bottom: 30px;
+  }
+}

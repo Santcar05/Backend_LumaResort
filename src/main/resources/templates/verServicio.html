@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LUMA RESORT - Paraíso de Lujo y Relax</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/IMAGES/favicon.ico" type="image/x-icon" />
+
+    <!-- Hojas de estilo -->
+    <link rel="stylesheet" href="/STYLES/estilosLandingPage.css" />
+    <link rel="stylesheet" href="/STYLES/generales.css" />
+    <link rel="stylesheet" href="/STYLES/plantillas.css" />
+    <link rel="stylesheet" href="/STYLES/verServicio.css" />
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <th:block th:replace="~{fragmentos :: header_f}"></th:block>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main
+      class="main_servicio"
+      th:style="'background-image: url(' + ${servicio.get().imagenURL} + ');'"
+    >
+      <div class="overlay"></div>
+
+      <div class="contenido-servicio">
+        <div class="servicio-info">
+          <h1 th:text="${servicio.get().nombre}" class="servicio-titulo"></h1>
+
+          <p th:text="${servicio.get().descripcion}" class="servicio-descripcion"></p>
+
+          <p class="servicio-precio">
+            Precio del servicio:
+            <span th:text="${servicio.get().precio}" class="servicio-precio-valor"></span>
+          </p>
+
+          <h2>Comentarios:</h2>
+          <ul class="comentarios-lista">
+            <li th:each="comentario : ${servicio.get().comentarios}" class="comentario-item">
+              <div class="comentario-contenido">
+                <p class="comentario-texto" th:text="${comentario.get().comentario}"></p>
+                <div class="comentario-meta">
+                  <p class="comentario-fecha" th:text="${comentario.get().fecha}"></p>
+                  <p class="comentario-rating">
+                    <span class="estrellas" th:text="${comentario.get().calificacion}">★</span>
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <th:block th:replace="~{fragmentos :: footer_f}"></th:block>
+
+    <script src="/SCRIPT/script.js" defer></script>
+  </body>
+</html>

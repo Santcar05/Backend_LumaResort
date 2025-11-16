@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- Metadatos básicos -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LUMA RESORT - Paraíso de Lujo y Relax</title>
+
+    <!-- Favicon (agregado como mejora) -->
+    <link rel="icon" href="/IMAGES/favicon.ico" type="image/x-icon" />
+
+    <!-- Hojas de estilo -->
+    <link rel="stylesheet" href="/STYLES/estilosLandingPage.css" />
+    <link rel="stylesheet" href="/STYLES/generales.css" />
+    <link rel="stylesheet" href="/STYLES/plantillas.css" />
+    <link rel="stylesheet" href="/STYLES/mostrarServicios.css" />
+
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Iconos Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <th:block th:replace="~{fragmentos :: header_f}"></th:block>
+    <main>
+      <section id="servicios">
+        <div id="infoServicios">
+          <h1>Nuestros Servicios</h1>
+          <h4>
+            En Luma Resort, ofrecemos una amplia variedad de servicios para satisfacer las
+            necesidades de nuestros huéspedes.
+          </h4>
+          <a th:href="@{/servicios/tarjetas}">
+            <button class="btn-detalle">TARJETAS</button>
+          </a>
+          <div id="buscar_contenedor">
+            <!-- Barra de búsqueda -->
+            <form
+              class="SearchForm"
+              role="search"
+              th:action="@{/servicios/tabla/buscarPorNombre}"
+              th:method="post"
+            >
+              <!-- Mejora de semántica -->
+              <input
+                type="text"
+                placeholder="Buscar..."
+                aria-label="Buscar en el sitio"
+                name="buscar"
+              />
+              <button
+                type="submit"
+                class="btn-detalle"
+                style="
+                  width: 100px;
+                  text-align: center;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+                value="buscar"
+                name="accion"
+              >
+                Buscar
+              </button>
+              <!-- Botón para limpiar la búsqueda -->
+              <button
+                type="submit"
+                class="btn-detalle"
+                style="
+                  width: 100px;
+                  text-align: center;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                "
+                name="accion"
+                value="limpiar"
+              >
+                Limpiar
+              </button>
+            </form>
+          </div>
+        </div>
+        <div id="tablaServicios">
+          <table id="serviciosTabla">
+            <thead>
+              <tr>
+                <th>Imagen del servicio</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="servicio : ${servicios}">
+                <td>
+                  <img th:src="${servicio.imagenURL}" alt="Imagen del servicio" />
+                </td>
+                <td th:text="${servicio.nombre}"></td>
+                <td th:text="${servicio.descripcion}"></td>
+                <td th:text="${servicio.precio}"></td>
+                <td>
+                  <a th:href="@{/servicios(id=${servicio.idServicio})}">
+                    <button class="btn-detalle">Ver Detalles</button>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <th:block th:replace="~{fragmentos :: footer_f}"></th:block>
+  </body>
+  <!-- Scripts al final del body para mejor performance -->
+  <script src="/SCRIPT/script.js" defer></script>
+</html>

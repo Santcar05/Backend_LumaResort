@@ -1,0 +1,148 @@
+#servicios {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  height: calc(--header-height);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+  background: linear-gradient(135deg, #303261, #1b1c34, #49aee0);
+  background-size: 400% 400%;
+  animation: fondoAnimado 15s ease infinite;
+  animation: FadeIn 0.8s ease-in-out;
+  color: var(--text-only-white);
+}
+
+/* Animación de degradado */
+@keyframes fondoAnimado {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* Fondo llamativo con degradado dinámico */
+#infoServicios {
+  background: transparent; /* deja ver el fondo global */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-only-white);
+  text-align: center;
+  padding: 40px 20px;
+  height: 71vh;
+}
+
+/* Animación del degradado */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#infoServicios h1 {
+  font-size: 3em;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  margin-bottom: 20px;
+  transition: color var(--transition-speed) ease;
+}
+#infoServicios h4 {
+  font-size: 1.5em;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  transition: color var(--transition-speed) ease;
+  margin-bottom: 30px;
+}
+
+#tablaServicios {
+  /*width: 90%;*/
+  margin: 2px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  background: var(--section-dark-blue);
+}
+
+/* Encabezados */
+#serviciosTabla thead {
+  background: linear-gradient(90deg, #262de0, #303261);
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+#serviciosTabla th {
+  padding: 15px;
+  text-align: center;
+}
+
+/* Celdas */
+#serviciosTabla td {
+  padding: 15px;
+  text-align: center;
+  color: var(--text-only-white);
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Filas alternas */
+#serviciosTabla tbody tr:nth-child(even) {
+  background-color: rgba(48, 50, 97, 0.6);
+}
+
+#serviciosTabla tbody tr:hover {
+  background-color: rgba(73, 174, 224, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+/* Imagen */
+#serviciosTabla img {
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+#serviciosTabla img:hover {
+  transform: scale(1.1);
+}
+
+#buscar_contenedor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+@keyframes translate {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

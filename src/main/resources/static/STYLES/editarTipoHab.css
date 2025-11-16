@@ -1,0 +1,134 @@
+:root {
+  --azul-fondo: #3b82f5;
+  --azul-claro: #60a5fa;
+  --azul-nav: #0a3a82;
+  --blanco: #ffffff;
+  --gris-claro: #f5f6fa;
+  --gris-medio: #dcdde1;
+  --negro: #2f3640;
+
+  --verde: #7ed957;
+  --ambar: #ffb800;
+  --rojo: #ff6b6b;
+}
+
+/* Fondo general */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--azul-claro), var(--azul-fondo));
+  color: var(--blanco);
+  min-height: 100vh;
+}
+
+/* ================== SIDEBAR (fragmentos) ================== */
+.sidebar {
+  width: 240px;
+  height: 100vh;
+  background: var(--azul-nav);
+  color: var(--blanco);
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.sidebar-header img {
+  width: 50px;
+  height: 50px;
+  margin-right: 12px;
+  border-radius: 8px;
+}
+
+.sidebar-title h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.sidebar-title span {
+  font-size: 0.85rem;
+  color: var(--gris-claro);
+}
+
+.sidebar-menu a {
+  display: block;
+  padding: 12px 15px;
+  margin: 8px 0;
+  text-decoration: none;
+  border-radius: 8px;
+  color: var(--blanco);
+  transition: 0.3s;
+}
+
+.sidebar-menu a.active,
+.sidebar-menu a:hover {
+  background: var(--azul-claro);
+}
+
+/* ================== MAIN CONTENT ================== */
+.main {
+  margin-left: 260px; /* dejar espacio para la sidebar */
+  padding: 20px 40px;
+}
+
+/* ================== FORMULARIO ================== */
+.container {
+  background: var(--blanco);
+  color: var(--negro);
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: var(--azul-nav);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.form-control {
+  border-radius: 10px;
+  border: 1px solid var(--gris-medio);
+}
+
+.form-control:focus {
+  border-color: var(--azul-fondo);
+  box-shadow: 0 0 5px var(--azul-claro);
+}
+
+/* ================== BOTONES ================== */
+.btn {
+  text-decoration: none;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-right: 6px;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--ambar);
+  color: var(--negro);
+}
+
+.btn-primary:hover {
+  background: #e0a600;
+}
+
+.btn-secondary {
+  background: var(--azul-fondo);
+  color: var(--blanco);
+}
+
+.btn-secondary:hover {
+  background: var(--azul-nav);
+}

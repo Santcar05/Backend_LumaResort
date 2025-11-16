@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="#{site.title}">LUMA RESORT - Paraíso de Lujo y Relax</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/IMAGES/favicon.ico" type="image/x-icon" />
+
+    <!-- Hojas de estilo -->
+    <link rel="stylesheet" href="/STYLES/estilosLandingPage.css" />
+    <link rel="stylesheet" href="/STYLES/generales.css" />
+    <link rel="stylesheet" href="/STYLES/plantillas.css" />
+    <link rel="stylesheet" href="/STYLES/login.css" />
+
+    <!-- Fuentes de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Iconos Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <th:block th:replace="~{fragmentos :: header_f}"></th:block>
+
+    <section id="seccion_login">
+      <section id="fondo" aria-labelledby="fondoHeading">
+        <div class="Carousel2">
+          <!-- Título principal -->
+          <h1 id="fondoHeading" th:text="#{login.create}">Crear Cuenta</h1>
+
+          <div id="contenedorFormCrearCuenta">
+            <!-- Formulario -->
+            <form
+              class="Formulario"
+              th:action="@{/crearUsuario}"
+              th:object="${usuarioCrearCuenta}"
+              method="post"
+            >
+              <div class="DuoFormulario">
+                <!-- Nombre -->
+                <label for="nombre" th:text="#{createAccount.name}">Nombre:</label>
+                <input
+                  type="text"
+                  id="nombre"
+                  name="nombre"
+                  th:field="*{nombre}"
+                  th:placeholder="#{createAccount.name.placeholder}"
+                  required
+                />
+                <br />
+
+                <!-- Apellido -->
+                <label for="apellido" th:text="#{createAccount.lastname}">Apellido:</label>
+                <input
+                  type="text"
+                  id="apellido"
+                  name="apellido"
+                  th:field="*{apellido}"
+                  th:placeholder="#{createAccount.lastname.placeholder}"
+                  required
+                />
+                <br />
+              </div>
+              <br />
+              <div class="DuoFormulario">
+                <!-- Correo -->
+                <label for="correo" th:text="#{login.email}">Email:</label>
+                <input
+                  type="email"
+                  id="correo"
+                  name="correo"
+                  th:field="*{correo}"
+                  th:placeholder="#{login.email.placeholder}"
+                  required
+                />
+                <br />
+
+                <!-- Contraseña -->
+                <label for="contrasena" th:text="#{login.password}">Contraseña:</label>
+                <input
+                  type="password"
+                  id="contrasena"
+                  name="contrasena"
+                  th:field="*{contrasena}"
+                  th:placeholder="#{login.password.placeholder}"
+                  required
+                />
+                <br />
+              </div>
+              <br />
+              <div class="DuoFormulario">
+                <!-- Cédula -->
+                <label for="cedula" th:text="#{createAccount.cedula}">Cédula:</label>
+                <input
+                  type="text"
+                  id="cedula"
+                  name="cedula"
+                  th:field="*{cedula}"
+                  th:placeholder="#{createAccount.cedula.placeholder}"
+                  required
+                />
+                <br />
+
+                <!-- Teléfono -->
+                <label for="telefono" th:text="#{createAccount.phone}">Teléfono:</label>
+                <input
+                  type="tel"
+                  id="telefono"
+                  name="telefono"
+                  th:field="*{telefono}"
+                  th:placeholder="#{createAccount.phone.placeholder}"
+                  required
+                />
+                <br />
+              </div>
+              <br />
+
+              <!-- Botón -->
+              <button type="submit" class="btn-detalle" id="btn-login" th:text="#{login.button}">
+                Crear Cuenta
+              </button>
+
+              <div id="enlaces">
+                <a id="olvidaste" href="#" th:text="#{login.forgot}">¿Olvidaste tu contraseña?</a>
+                <a id="registrate" th:href="@{/login}" th:text="#{login.title}">Iniciar Sesión</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Footer  -->
+    <div th:replace="~{fragmentos :: footer_f}"></div>
+
+    <script src="/SCRIPT/script.js" defer></script>
+  </body>
+</html>
