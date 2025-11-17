@@ -1,5 +1,6 @@
 package com.example.lumaresort.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
@@ -17,10 +18,11 @@ public class TranslationController {
 
     private static final Logger logger = LoggerFactory.getLogger(TranslationController.class);
     private final RestTemplate restTemplate = new RestTemplate();
+    private final ObjectMapper objectMapper = new ObjectMapper();
     private static final String MYMEMORY_API = "https://api.mymemory.translated.net/get";
 
     @GetMapping
-    public ResponseEntity<?> translate(
+    public ResponseEntity<String> translate(
             @RequestParam String q,
             @RequestParam String langpair,
             @RequestParam(required = false) String de) {
@@ -53,17 +55,18 @@ public class TranslationController {
                     String.class
             );
 
-            logger.info("Traducción exitosa. Status: {}", response.getStatusCode());
-
-            // Validar que la respuesta sea JSON válido
             String body = response.getBody();
 
+            // Validar que la respuesta sea JSON válido
             if (body != null && body.startsWith("INVALID")) {
-                // MyMemory devolvió error en texto plano
+                // MyMemory devolvió error en texto plano, convertir a JSON
                 logger.error("Error de MyMemory: {}", body);
                 return createErrorResponse(body);
             }
 
+            logger.info("Traducción exitosa. Status: {}", response.getStatusCode());
+
+            // Devolver el JSON directamente como lo devuelve MyMemory
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
                     .body(body);
@@ -78,13 +81,27 @@ public class TranslationController {
         }
     }
 
-    private ResponseEntity<Map<String, Object>> createErrorResponse(String message) {
-        Map<String, Object> errorResponse = new HashMap<>();
-        errorResponse.put("error", message);
-        errorResponse.put("responseData", Map.of("translatedText", ""));
+    private ResponseEntity<String> createErrorResponse(String message) {
+        try {
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("error", message);
 
-        return ResponseEntity.status(HttpStatus.OK) // Cambiar a 200 para que Angular no lo trate como error
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(errorResponse);
+            Map<String, String> responseData = new HashMap<>();
+            responseData.put("translatedText", "");
+            errorResponse.put("responseData", responseData);
+
+            // Convertir Map a JSON String
+            String jsonResponse = objectMapper.writeValueAsString(errorResponse);
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(jsonResponse);
+
+        } catch (Exception e) {
+            logger.error("Error al crear respuesta de error: {}", e.getMessage());
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body("{\"error\":\"" + message + "\",\"responseData\":{\"translatedText\":\"\"}}");
+        }
     }
 }
