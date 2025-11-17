@@ -30,25 +30,22 @@ public class TranslationController {
 
             String email = de != null ? de : "info@lumaresort.com";
 
-            // Construir URL usando UriComponentsBuilder (maneja la codificación automáticamente)
             String url = UriComponentsBuilder
                     .fromHttpUrl(MYMEMORY_API)
                     .queryParam("q", q)
                     .queryParam("langpair", langpair)
                     .queryParam("de", email)
-                    .encode() // Codifica solo una vez
+                    .encode()
                     .toUriString();
 
             logger.info("URL final: {}", url);
 
-            // Configurar headers
             HttpHeaders headers = new HttpHeaders();
             headers.set("User-Agent", "LumaResort/1.0");
             headers.set("Accept", "application/json");
 
             HttpEntity<String> entity = new HttpEntity<>(headers);
 
-            // Hacer petición a MyMemory
             ResponseEntity<String> response = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
@@ -58,9 +55,18 @@ public class TranslationController {
 
             logger.info("Traducción exitosa. Status: {}", response.getStatusCode());
 
+            // Validar que la respuesta sea JSON válido
+            String body = response.getBody();
+
+            if (body != null && body.startsWith("INVALID")) {
+                // MyMemory devolvió error en texto plano
+                logger.error("Error de MyMemory: {}", body);
+                return createErrorResponse(body);
+            }
+
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(response.getBody());
+                    .body(body);
 
         } catch (RestClientException e) {
             logger.error("Error al llamar a MyMemory API: {}", e.getMessage());
@@ -77,7 +83,7 @@ public class TranslationController {
         errorResponse.put("error", message);
         errorResponse.put("responseData", Map.of("translatedText", ""));
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity.status(HttpStatus.OK) // Cambiar a 200 para que Angular no lo trate como error
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(errorResponse);
     }
