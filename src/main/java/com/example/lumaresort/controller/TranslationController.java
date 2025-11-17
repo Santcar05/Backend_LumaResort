@@ -1,5 +1,6 @@
 package com.example.lumaresort.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,19 +58,48 @@ public class TranslationController {
 
             String body = response.getBody();
 
-            // Validar que la respuesta sea JSON válido
-            if (body != null && body.startsWith("INVALID")) {
-                // MyMemory devolvió error en texto plano, convertir a JSON
-                logger.error("Error de MyMemory: {}", body);
+            if (body == null || body.isEmpty()) {
+                logger.error("Respuesta vacía de MyMemory");
+                return createErrorResponse("Respuesta vacía del servicio de traducción");
+            }
+
+            // Validar si es un error en texto plano (no JSON)
+            if (body.startsWith("INVALID") || body.startsWith("ERROR")) {
+                logger.error("Error de MyMemory (texto plano): {}", body);
                 return createErrorResponse(body);
             }
 
-            logger.info("Traducción exitosa. Status: {}", response.getStatusCode());
+            // Intentar parsear como JSON para validar
+            try {
+                JsonNode jsonNode = objectMapper.readTree(body);
 
-            // Devolver el JSON directamente como lo devuelve MyMemory
-            return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(body);
+                // Verificar si MyMemory devolvió un error dentro del JSON
+                if (jsonNode.has("responseData")) {
+                    JsonNode responseData = jsonNode.get("responseData");
+
+                    if (responseData.has("translatedText")) {
+                        String translatedText = responseData.get("translatedText").asText();
+
+                        // Verificar si el texto traducido contiene el error
+                        if (translatedText.startsWith("INVALID") || translatedText.startsWith("ERROR")) {
+                            logger.error("Error en translatedText: {}", translatedText);
+                            return createErrorResponse(translatedText);
+                        }
+
+                        logger.info("Traducción exitosa: '{}' -> '{}'", q, translatedText);
+                    }
+                }
+
+                // Si llegamos aquí, la respuesta es JSON válido
+                return ResponseEntity.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(body);
+
+            } catch (Exception parseException) {
+                logger.error("Error al parsear JSON de MyMemory: {}", parseException.getMessage());
+                logger.error("Body recibido: {}", body);
+                return createErrorResponse("Respuesta inválida del servicio de traducción");
+            }
 
         } catch (RestClientException e) {
             logger.error("Error al llamar a MyMemory API: {}", e.getMessage());
@@ -90,8 +120,9 @@ public class TranslationController {
             responseData.put("translatedText", "");
             errorResponse.put("responseData", responseData);
 
-            // Convertir Map a JSON String
             String jsonResponse = objectMapper.writeValueAsString(errorResponse);
+
+            logger.debug("Respuesta de error generada: {}", jsonResponse);
 
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
@@ -101,7 +132,7 @@ public class TranslationController {
             logger.error("Error al crear respuesta de error: {}", e.getMessage());
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body("{\"error\":\"" + message + "\",\"responseData\":{\"translatedText\":\"\"}}");
+                    .body("{\"error\":\"" + message.replace("\"", "\\\"") + "\",\"responseData\":{\"translatedText\":\"\"}}");
         }
     }
 }
